@@ -7,11 +7,11 @@
       class="container mx-auto transition-all duration-500 ease-in-out" 
       :class="{ 'max-w-6xl': isScrolled }"
     >
-      <nav class="flex justify-between items-center px-6 py-4">
+      <nav class="flex justify-between items-center px-6 py-2">
 
         <div 
           class="flex-shrink-0 transition-all duration-500"
-          :class="isScrolled ? 'w-12 h-12' : 'w-16 h-16'"
+          :class="isScrolled ? 'w-12 h-12' : 'w-14 h-14'"
         >
           <img src="/src/assets/images/utn.png" alt="UTNay" class="w-full h-full object-contain" >
         </div>
@@ -19,6 +19,7 @@
           <a href="#carreras" class="hover:text-green-200 transition-colors">Carreras</a>
           <a href="#contacto" class="hover:text-green-200 transition-colors">Contacto</a>
           <a href="#vinculacion" class="hover:text-green-200 transition-colors">Vinculación</a>
+          <a href="#beca" class="hover:text-green-200 transition-color">Becas</a>
         </div>
         <div class="md:visible">
           <button class="focus:outline-none">

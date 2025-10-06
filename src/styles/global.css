@@ -28,3 +28,54 @@ body {
     line-height: 1.6;
 }
 
+.neon-text-wrapper {
+  position: relative;
+  display: inline-block;
+  color: #fff; /* Color base del texto */
+  text-shadow:
+    0 0 5px #00ff00,
+    0 0 10px #00ff00,
+    0 0 20px #00ff00,
+    0 0 40px #00ff00,
+    0 0 80px #00ff00;
+  animation: neon-flicker 3s ease-in-out forwards;
+}
+
+.neon-text-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #9dffad, transparent);
+  background-size: 200% 100%;
+  mix-blend-mode: screen; /* Puedes experimentar con 'overlay' o 'color-dodge' también */
+  animation: neon-sweep 2s ease-in-out forwards 0.5s; /* El 0.5s es un retraso */
+}
+
+@keyframes neon-sweep {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes neon-flicker {
+  0%, 100% {
+    text-shadow:
+      0 0 5px #00ff00,
+      0 0 10px #00ff00,
+      0 0 20px #00ff00,
+      0 0 40px #00ff00,
+      0 0 80px #00ff00;
+  }
+  50% {
+    text-shadow:
+      0 0 10px #00ff00,
+      0 0 20px #00ff00,
+      0 0 40px #00ff00;
+  }
+}
