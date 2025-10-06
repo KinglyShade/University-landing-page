@@ -4,7 +4,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+:root{
+        --bg-dark: #0A0A12;
+      --bg-light: #181824;
+      --text-primary: #F0F0F0;
+      --text-secondary: #A0A0B0;
+      --accent-primary: #00D4FF;
+      --accent-secondary: #4E49F2;
+      --font-body: 'Space Grotesk', sans-serif;
+      --font-heading: 'Montserrat', sans-serif;
+      --gradient-main: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+    }
 
 
 html {
@@ -13,7 +23,8 @@ html {
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #ffffff;
+    background-color: #000000;
     color: #25e839;
     line-height: 1.6;
 }
+
