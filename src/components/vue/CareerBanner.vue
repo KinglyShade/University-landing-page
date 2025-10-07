@@ -15,6 +15,10 @@ defineProps({
     type: String,
     default: '', // Un valor por defecto por si no se proporciona
   },
+  backgroundImage: { // Nueva prop para la imagen de fondo
+    type: String,
+    required: true,
+  }
 });
 
 // Variable reactiva para controlar el estado del hover
@@ -27,6 +31,12 @@ const isHovered = ref(false);
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
   >
+    <div 
+      class="background-image-wrapper"
+      :class="{ 'zoomed': isHovered }"
+      :style="{ 'background-image': `url(${backgroundImage})` }"
+    ></div>
+
     <img
       :src="imageUrl"
       alt="Imagen de la carrera"
@@ -55,7 +65,7 @@ const isHovered = ref(false);
   background-color: #f0f4f8;
   border-bottom: 1px solid #e2e8f0;
   cursor: pointer;
-  overflow: hidden;
+  overflow: hidden; /* Muy importante para que el zoom no se salga */
   transition: background-color 0.3s ease;
 }
 
@@ -63,7 +73,24 @@ const isHovered = ref(false);
   background-color: #e2e8f0;
 }
 
-/* Estilo de la imagen de fondo */
+/* NUEVOS ESTILOS PARA LA IMAGEN DE FONDO */
+.background-image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover; /* Asegura que la imagen cubra el área */
+  background-position: center; /* Centra la imagen */
+  transition: transform 0.5s ease; /* Transición para el efecto de zoom */
+  z-index: 0; /* Asegura que esté detrás de todo lo demás */
+}
+
+.background-image-wrapper.zoomed {
+  transform: scale(1.08); /* Ligeramente más grande al hacer hover */
+}
+
+/* Estilo de la imagen de contenido (la que ya tenías) */
 .career-image {
   position: absolute;
   bottom: 0;
@@ -72,12 +99,12 @@ const isHovered = ref(false);
   width: auto;
   opacity: 0;
   transform: translateX(-20px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity 0.6s ease, transform 0.4s ease;
   z-index: 1;
 }
 
 .career-image.visible {
-  opacity: 0.15; /* Más sutil para que no opaque el texto */
+  opacity: 0.80; /* Más sutil para que no opaque el texto */
   transform: translateX(0);
 }
 
@@ -88,8 +115,12 @@ const isHovered = ref(false);
   position: relative;
   z-index: 2;
   text-align: center;
+  text-decoration: "-";
   padding: 0 1rem; /* Menos padding en móvil */
   transition: transform 0.4s ease;
+  background-color: rgba(255, 255, 255, 0.7); /* Fondo semi-transparente para legibilidad */
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
 }
 
 .career-title {
@@ -132,6 +163,7 @@ const isHovered = ref(false);
   .text-content {
     padding: 0 2rem;
     transition: transform 0.4s ease, text-align 0.4s ease;
+    background-color: transparent; /* Quitamos el fondo en desktop si quieres */
   }
 
   /* Animación de Hover para ESCRITORIO (efecto de deslizamiento horizontal) */
