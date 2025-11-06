@@ -1,39 +1,54 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 
-// Carga variables de entorno desde .env
-dotenv.config();
-
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = 'mongodb+srv://kinglyshade_db_user:LzWyfJZOksGHKMPj@ulp.bnzc439.mongodb.net/?appName=ulp';
 
 if (!MONGODB_URI) {
-    console.warn('Warning: MONGODB_URI no está definido en las variables de entorno. Define MONGODB_URI en .env');
+    console.error('Error: MONGODB_URI no está definido. Por favor define MONGODB_URI en el archivo .env');
 }
+
+// Variable para tracking de la promesa de conexión
+let cachedConnection = null;
 
 /**
  * connectDB - conecta a MongoDB usando mongoose.
  * Llama a esta función desde endpoints/server-side antes de usar modelos.
+ * Usa caché para evitar múltiples conexiones simultáneas.
  */
 async function connectDB() {
-    if (mongoose.connection.readyState >= 1) {
-        // Ya conectado o en proceso
+    // Si ya hay una conexión activa, retornarla
+    if (mongoose.connection.readyState === 1) {
+        console.log('Ya conectado a MongoDB');
         return mongoose;
     }
 
+    // Si hay una conexión en progreso, esperar a que termine
+    if (cachedConnection) {
+        console.log('Esperando conexión en progreso...');
+        return cachedConnection;
+    }
+
+    if (!MONGODB_URI) {
+        throw new Error('MONGODB_URI no está definido en las variables de entorno');
+    }
+
     try {
-        await mongoose.connect(MONGODB_URI || 'mongodb+srv://kinglyshade_db_user:LzWyfJZOksGHKMPj@ulp.bnzc439.mongodb.net/?appName=ulp', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
+        console.log('Conectando a MongoDB...');
+        
+        // Cachear la promesa de conexión
+        cachedConnection = mongoose.connect(MONGODB_URI, {
+            dbName: 'ulps', // Nombre de tu base de datos
         });
-        console.log('Connected to MongoDB');
+
+        await cachedConnection;
+        console.log('Conectado exitosamente a MongoDB');
+        
         return mongoose;
     } catch (err) {
-        console.error('MongoDB connection error:', err);
+        console.error('Error al conectar a MongoDB:', err.message);
+        cachedConnection = null; // Limpiar caché en caso de error
         throw err;
     }
 }
 
 export default connectDB;
-
-// También exportamos mongoose por si hace falta directamente
 export { mongoose };
