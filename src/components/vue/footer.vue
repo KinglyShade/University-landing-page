@@ -8,13 +8,22 @@
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
         <!-- Branding -->
-        <div v-motion-slide-in-on-visible-once-bottom class="col-span-2 md:col-span-4 lg:col-span-1">
+        <div
+          v-motion
+          :initial="{ opacity: 0, y: 40 }"
+          :enter="{ opacity: 1, y: 0, transition: { duration: 0.6 } }"
+          class="col-span-2 md:col-span-4 lg:col-span-1"
+        >
           <h2 class="text-2xl font-extrabold mb-2 tracking-wide">Universidad Tecnológica</h2>
           <p class="text-gray-300 text-sm">Formando líderes para un futuro innovador.</p>
         </div>
 
         <!-- Navegación -->
-        <div v-motion-slide-in-on-visible-once-bottom>
+        <div
+          v-motion
+          :initial="{ opacity: 0, y: 30 }"
+          :enter="{ opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.05 } }"
+        >
           <h3 class="font-bold mb-4 uppercase tracking-wider">Navegación</h3>
           <ul class="space-y-2 text-gray-400">
             <li>
@@ -33,7 +42,11 @@
         </div>
 
         <!-- Recursos -->
-        <div v-motion-slide-in-on-visible-once-bottom>
+        <div
+          v-motion
+          :initial="{ opacity: 0, y: 30 }"
+          :enter="{ opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.1 } }"
+        >
           <h3 class="font-bold mb-4 uppercase tracking-wider">Recursos</h3>
           <ul class="space-y-2 text-gray-400">
             <li>
@@ -49,7 +62,11 @@
         </div>
 
         <!-- Legal -->
-        <div v-motion-slide-in-on-visible-once-bottom>
+        <div
+          v-motion
+          :initial="{ opacity: 0, y: 30 }"
+          :enter="{ opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.15 } }"
+        >
           <h3 class="font-bold mb-4 uppercase tracking-wider">Legal</h3>
           <ul class="space-y-2 text-gray-400">
             <li>
@@ -64,7 +81,9 @@
 
       <!-- Bottom Bar -->
       <div
-        v-motion-slide-in-on-visible-once-bottom
+        v-motion
+        :initial="{ opacity: 0, y: 30 }"
+        :enter="{ opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.2 } }"
         class="mt-12 pt-8 border-t border-gray-700 flex flex-col sm:flex-row justify-between items-center"
       >
         <p class="text-gray-400 text-sm mb-4 sm:mb-0">

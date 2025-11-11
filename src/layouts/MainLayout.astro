@@ -3,7 +3,7 @@
 import "../styles/global.css";
 
 import "../scripts/main.js";
-import HeaderFlotante from '../components/vue/FloatHeader.vue';
+import HeaderFlotante from "../components/vue/FloatHeader.vue";
 
 export interface Props {
     title: string;
@@ -11,11 +11,7 @@ export interface Props {
 const { title } = Astro.props;
 ---
 
-
-<!--ayuda dios no sé qué estoy haciendo --> 
-<!--Ulises: Kaleb te odio  -->
-<!-- bonita plantilla espero sea la ultima -->
-<!doctype html>
+<!--ayuda dios no sé qué estoy haciendo --><!--Ulises: Kaleb te odio  --><!-- bonita plantilla espero sea la ultima --><!doctype html>
 <html lang="es">
     <head>
         <meta charset="UTF-8" />
@@ -24,15 +20,14 @@ const { title } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
     </head>
-  <body class="min-h-screen flex flex-col">
-            <header class="fixed top-0 left-0 w-full z-50">
-        <HeaderFlotante client:load />
+    <body class="min-h-screen flex flex-col">
+        <header class="fixed top-0 left-0 w-full z-50">
+            <HeaderFlotante client:load />
         </header>
 
         <main>
             <slot />
         </main>
-        
     </body>
 </html>
 
