@@ -1,0 +1,65 @@
+---
+// PÁGINA: src/pages/carreras/[slug].astro
+
+// 1. IMPORTA TU ARRAY
+// Ajusta la ruta si tu archivo 'db.js' está en otro lado.
+// El nombre del archivo que me pasaste es 'db.js' pero el
+// comentario dice 'src/data/careers.js'.
+// ¡Asegúrate que la ruta sea la correcta!
+import { careers } from "../../DB/db.js"; // <-- El archivo que me pasaste
+import MainLayout from "../../layouts/MainLayout.astro";
+import '../../styles/global.css';
+
+// 2. EL CEREBRO: getStaticPaths
+// No necesita 'async' porque el array ya está en memoria.
+export function getStaticPaths() {
+  // 3. LA "CONSULTA" ES SOLO USAR EL ARRAY
+  const todasLasCarreras = careers;
+
+  // 4. EL MAPEO
+  // Transforma el array al formato de Astro
+  return todasLasCarreras.map((carrera) => {
+    return {
+      params: { slug: carrera.id }, // <-- Usa el ID que acabas de añadir
+      props: { carrera }, // <-- Pasa el objeto completo
+    };
+  });
+}
+
+// 5. RECIBIR LOS DATOS
+// Astro.props.carrera tiene el objeto de UNA carrera
+const { carrera } = Astro.props;
+---
+
+<MainLayout title={`UTNay - ${carrera.name}`}>
+
+<div class="content mt-10 flex flex-col">
+  <div
+    class="w-full h-64 bg-cover bg-center"
+    style={`background-image: url(${carrera.bgImg});`}
+  >
+    <div
+      class="w-full h-full bg-black bg-opacity-50 flex items-center justify-center"
+    >
+      <h1 class="text-white text-4xl font-bold">{carrera.name}</h1>
+    </div>
+    <div class="mt-8 flex w-full h-full">
+      <h1 class="">{carrera.name}</h1>
+      <img
+        class="h-50 w-50"
+        src={carrera.img}
+        alt={`Logo de ${carrera.name}`}
+      />
+      <p>{carrera.description}</p>
+
+      <h3>Detalles</h3>
+      <ul>
+        <li><strong>Duración:</strong> {carrera.duration}</li>
+        <li><strong>Modalidad:</strong> {carrera.modality}</li>
+        <li><strong>Campo laboral:</strong> {carrera.field}</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</MainLayout>

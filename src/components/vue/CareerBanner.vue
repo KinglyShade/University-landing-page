@@ -1,6 +1,10 @@
 <script setup>
 import { ref } from 'vue';
 
+/*
+Componente para mostrar el banner de carreras
+Ayudaaa no se porque no se expande a todo el ancho del contenedor en Astro :(
+*/  
 // Declara las props que el componente espera recibir desde Astro
 defineProps({
   title: {
@@ -55,6 +59,7 @@ const isHovered = ref(false);
 </template>
 
 <style>
+
 /* Estilo del contenedor principal */
 .career-container {
   position: relative;
@@ -65,6 +70,7 @@ const isHovered = ref(false);
   background-color: #f0f4f8;
   border-bottom: 1px solid #e2e8f0;
   cursor: pointer;
+  width: 100%;
   overflow: hidden; /* Muy importante para que el zoom no se salga */
   transition: background-color 0.3s ease;
 }

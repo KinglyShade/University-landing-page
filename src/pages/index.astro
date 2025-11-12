@@ -5,7 +5,6 @@ import Hero from "../components/react/Hero.jsx";
 import CareerBanner from '../components/vue/CareerBanner.vue';
 import NoticiasSlider from '../components/vue/noticiasslider.vue';
 import HeaderFlotante from '../components/vue/FloatHeader.vue';
-import Footer from '../components/vue/footer.vue';
 import type { ImageMetadata } from 'astro';
 import { careers } from "../DB/db.js";
 import connectDB from '../DB/conect.js';
@@ -41,7 +40,7 @@ await connectDB();
         <div class="max-w-8xl mx-auto">
             <NoticiasSlider client:load />
         </div>
-    <section id="carreras" class="my-20 mx-auto">
+    <section id="carreras" class="my-20 mx-auto" style="margin: 0 auto; padding: 2rem;">
         <div class="text-center bg-gray-100 py-20 px-4">
             <h2 class="text-4xl font-bold text-gray-800 mb-2">
                 Oferta Educativa
@@ -66,6 +65,5 @@ await connectDB();
         </div>
     </section>
       </div>
-    <Footer client:only="vue" />
 </MainLayout>
 <script src="../scripts/main.js"></script>
