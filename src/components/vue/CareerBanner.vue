@@ -1,6 +1,4 @@
 <script setup>
-import { ref } from 'vue';
-
 // Declara las props que el componente espera recibir desde Astro
 defineProps({
   title: {
@@ -13,180 +11,88 @@ defineProps({
   },
   description: {
     type: String,
-    default: '', // Un valor por defecto por si no se proporciona
+    default: '',
   },
-  backgroundImage: { // Nueva prop para la imagen de fondo
+  backgroundImage: {
     type: String,
     required: true,
   }
 });
-
-// Variable reactiva para controlar el estado del hover
-const isHovered = ref(false);
 </script>
 
 <template>
   <div
-    class="career-container"
-    @mouseenter="isHovered = true"
-    @mouseleave="isHovered = false"
+    class="
+      group relative flex items-center justify-center 
+      h-[180px] md:h-[150px] 
+      bg-gray-100 hover:bg-gray-200 
+      border-b border-gray-200 
+      cursor-pointer overflow-hidden 
+      transition-colors duration-300 ease-in-out
+      font-sans "
   >
     <div 
-      class="background-image-wrapper"
-      :class="{ 'zoomed': isHovered }"
+      class="
+        absolute inset-0 w-full h-full 
+        bg-cover bg-center 
+        transition-transform duration-500 ease-in-out 
+        z-0
+        group-hover:scale-108
+      "
       :style="{ 'background-image': `url(${backgroundImage})` }"
     ></div>
 
     <img
       :src="imageUrl"
       alt="Imagen de la carrera"
-      :class="{ 'visible': isHovered }"
-      class="career-image"
+      class="
+        absolute bottom-0 left-0 h-full w-auto 
+        opacity-0 transform -translate-x-5 
+        transition-all duration-500 ease-in-out 
+        z-10
+        group-hover:opacity-80 group-hover:translate-x-0
+      "
     />
     
     <div 
-      class="text-content"
-      :class="{ 'hovered': isHovered }"
+      class="
+        relative z-20 text-center 
+        px-4 md:px-8 
+        bg-white/70 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none 
+        py-2 px-4 rounded-lg 
+        transition-all duration-400 ease-in-out
+        
+        group-hover:-translate-y-[10%]
+        
+        md:group-hover:translate-x-[80%] md:group-hover:text-right
+      "
     >
-      <h3 class="career-title">{{ title }}</h3>
-      <p class="career-description">{{ description }}</p>
+      <h3 
+        class="
+          text-2xl md:text-3xl font-bold text-brand-dark 
+          transition-all duration-400 ease-in-out
+          
+          group-hover:text-brand-blue group-hover:-translate-y-2
+          
+          md:group-hover:text-2xl md:group-hover:translate-y-0 md:group-hover:text-brand-dark
+        "
+      >
+        {{ title }}
+      </h3>
+      
+      <p 
+        class="
+          text-sm text-brand-muted 
+          opacity-0 max-h-0 md:max-h-full 
+          overflow-hidden 
+          transition-all duration-400 ease-in-out 
+          md:max-w-[250px]
+          
+          group-hover:opacity-100 group-hover:max-h-[100px]
+        "
+      >
+        {{ description }}
+      </p>
     </div>
   </div>
 </template>
-
-<style>
-/* Estilo del contenedor principal */
-.career-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 180px; /* Un poco más de altura para móviles */
-  background-color: #f0f4f8;
-  border-bottom: 1px solid #e2e8f0;
-  cursor: pointer;
-  overflow: hidden; /* Muy importante para que el zoom no se salga */
-  transition: background-color 0.3s ease;
-}
-
-.career-container:hover {
-  background-color: #e2e8f0;
-}
-
-/* NUEVOS ESTILOS PARA LA IMAGEN DE FONDO */
-.background-image-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover; /* Asegura que la imagen cubra el área */
-  background-position: center; /* Centra la imagen */
-  transition: transform 0.5s ease; /* Transición para el efecto de zoom */
-  z-index: 0; /* Asegura que esté detrás de todo lo demás */
-}
-
-.background-image-wrapper.zoomed {
-  transform: scale(1.08); /* Ligeramente más grande al hacer hover */
-}
-
-/* Estilo de la imagen de contenido (la que ya tenías) */
-.career-image {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  width: auto;
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.6s ease, transform 0.4s ease;
-  z-index: 1;
-}
-
-.career-image.visible {
-  opacity: 0.80; /* Más sutil para que no opaque el texto */
-  transform: translateX(0);
-}
-
-/* --- ESTILOS RESPONSIVOS --- */
-
-/* Base (Mobile First) */
-.text-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  text-decoration: "-";
-  padding: 0 1rem; /* Menos padding en móvil */
-  transition: transform 0.4s ease;
-  background-color: rgba(255, 255, 255, 0.7); /* Fondo semi-transparente para legibilidad */
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-}
-
-.career-title {
-  font-size: 1.5rem; /* Título más pequeño para móvil */
-  font-weight: 700;
-  color: #1a202c;
-  transition: all 0.4s ease;
-}
-
-.career-description {
-  font-size: 0.9rem;
-  color: #4a5568;
-  opacity: 0;
-  max-height: 0; /* Ocultamos la descripción para la animación */
-  overflow: hidden;
-  transition: opacity 0.4s ease, max-height 0.4s ease;
-}
-
-/* Animación de Hover para MÓVIL (efecto de deslizamiento vertical) */
-.text-content.hovered {
-  transform: translateY(-10%); /* Sube un poco el bloque de texto */
-}
-
-.text-content.hovered .career-title {
-  color: #2c5282;
-  transform: translateY(-10px); /* Sube un poco el título */
-}
-
-.text-content.hovered .career-description {
-  opacity: 1;
-  max-height: 100px; /* Revela la descripción */
-}
-
-/* Estilos para Tablet y Escritorio (a partir de 768px) */
-@media (min-width: 768px) {
-  .career-container {
-    height: 150px; /* Volvemos a la altura original */
-  }
-
-  .text-content {
-    padding: 0 2rem;
-    transition: transform 0.4s ease, text-align 0.4s ease;
-    background-color: transparent; /* Quitamos el fondo en desktop si quieres */
-  }
-
-  /* Animación de Hover para ESCRITORIO (efecto de deslizamiento horizontal) */
-  .text-content.hovered {
-    /* Restauramos la animación original para pantallas grandes */
-    transform: translate(80%);
-    text-align: right;
-  }
-
-  .career-title {
-    font-size: 2rem; /* Título más grande */
-  }
-
-  .text-content.hovered .career-title {
-    font-size: 1.75rem;
-    transform: translateY(0); /* Reseteamos la transformación móvil */
-    color: #1a202c; /* Color original */
-  }
-  
-  .career-description {
-    max-width: 250px;
-    max-height: none; /* Quitamos la restricción de altura */
-    transition: opacity 0.4s ease 0.1s;
-  }
-}
-</style>

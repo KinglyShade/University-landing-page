@@ -1,0 +1,5 @@
+Listado de rutas de carpetas para el volumen Data
+El número de serie del volumen es 42B2-AF88
+D:.
+No existe ninguna subcarpeta 
+

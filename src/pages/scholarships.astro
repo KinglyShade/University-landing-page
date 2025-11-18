@@ -1,0 +1,54 @@
+---
+// src/pages/becas.astro
+import MainLayout from "../layouts/MainLayout.astro";
+import HeaderFlotante from "../components/vue/FloatHeader.vue";
+import BecaCard from "../components/vue/ScholarshipBanner.vue";
+import Footer from "../components/vue/footer.vue";
+import { becasData } from "../DB/becas.js";
+
+import "../styles/global.css";
+
+const becasActivas = becasData.filter((b) => b.activa);
+---
+
+<MainLayout title="Becas - Universidad Tecnológica de Nayarit">
+    <div class="bg-white min-h-screen flex flex-col font-sans text-gray-800">
+        <HeaderFlotante client:load />
+
+        <div
+            class="text-center bg-gray-100 py-20 px-4 border-b border-gray-200 mt-16"
+        >
+            <h2
+                class="text-4xl md:text-6xl font-extrabold py-2 mb-4 drop-shadow-sm bg-gradient-to-r from-green-600 to-cyan-600 bg-clip-text text-transparent"
+            >
+                Becas Institucionales
+            </h2>
+
+            <p
+                class="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed font-medium"
+            >
+                Reconocemos tu esfuerzo académico y talento deportivo. Consulta
+                las convocatorias vigentes para el periodo <span
+                    class="font-bold text-gray-800">Enero-Abril 2026</span
+                >.
+            </p>
+        </div>
+
+        <section
+            id="becas"
+            class="my-20 mx-auto max-w-7xl px-4 flex-grow w-full"
+        >
+            <div class="grid grid-cols-1 lg:grid-cols-1 gap-8">
+                {
+                    becasActivas.map((beca) => (
+                        <BecaCard client:visible beca={beca} />
+                    ))
+                }
+            </div>
+        </section>
+
+        <Footer client:only="vue" />
+    </div>
+</MainLayout>
+
+<script src="../scripts/main.js"></script>
