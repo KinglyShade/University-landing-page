@@ -7,21 +7,16 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   // Tus integraciones se quedan exactamente como están
-  integrations: [react(), vue(), tailwind()],
+  integrations: [
+    react(),
+    vue({
+      // registrar el entrypoint cliente que instala @vueuse/motion
+      appEntrypoint: './src/plugins/v-motion.js'
+    }),
+    tailwind()
+  ],
 
   // --- Añade esta sección para que ngrok funcione ---
-  vite: {
-    server: {
-      hmr: {
-        // Ayuda a que la recarga en caliente funcione con ngrok
-        clientPort: 443,
-      },
-      // Permite el acceso desde tu red y ngrok
-      host: true, 
-      // Permite cualquier host que termine en .ngrok-free.dev
-      allowedHosts: [
-        '*.ngrok-free.dev'
-      ]
-    }
-  }
+  // No forzamos HMR/WS por defecto. Si necesitas ngrok/hmr personalizado,
+  // vuelve a añadir `vite.server.hmr` con protocol: 'wss' y clientPort: 443.
 });
