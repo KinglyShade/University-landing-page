@@ -73,7 +73,7 @@ maldito insecto ya me tienes harto
             </ul>
           </div>
 
-          <a href="https://www.utnay.edu.mx/becas.html" class="hover:text-green-200 transition-colors">Becas</a>
+          <a href="/scholarships" class="hover:text-green-200 transition-colors">Becas</a>
         </div>
 
         <!-- Botón hamburguesa móvil -->

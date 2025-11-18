@@ -32,7 +32,7 @@ const isHovered = ref(false);
       :class="{ 'visible': isHovered }"
     />
     
-    <div class="content-wrapper" :class="{ 'hovered': isHovered }">
+    <div class="content-wrapper " :class="{ 'hovered': isHovered }">
       
       <h3 class="text-xl md:text-2xl font-extrabold text-white uppercase tracking-wide mb-0 drop-shadow-md leading-none">
         {{ beca.titulo }}
@@ -95,8 +95,8 @@ que es más fácil de mantener aquí que en clases de Tailwind. */
 
 .beca-container {
   position: relative;
-  height: 380px; 
-  border-radius: 1rem;
+  height: 320px; 
+  border-radius: 1.5rem;
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 10px 15px -3px rgba(100, 116, 139, 0.2), 0 4px 6px -2px rgba(100, 116, 139, 0.1);
@@ -113,7 +113,7 @@ que es más fácil de mantener aquí que en clases de Tailwind. */
 .beca-icon {
   position: absolute;
   bottom: 10px; left: 10px;   
-  width: 140px; height: auto;
+  width: 120px; height: auto;
   opacity: 0; 
   transform: rotate(-15deg) translateX(-40px); 
   transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -132,7 +132,7 @@ que es más fácil de mantener aquí que en clases de Tailwind. */
   height: 100%;
   display: flex; flex-direction: column;
   justify-content: flex-end;
-  padding: 1.25rem; 
+  padding: 1rem; 
   transition: all 0.5s ease;
 }
 
