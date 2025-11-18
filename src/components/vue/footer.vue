@@ -87,7 +87,7 @@
         class="mt-12 pt-8 border-t border-gray-700 flex flex-col sm:flex-row justify-between items-center"
       >
         <p class="text-gray-400 text-sm mb-4 sm:mb-0">
-          © {{ new Date().getFullYear() }} Universidad Tecnológica de Nayarit. Todos los derechos reservados.
+          © {{ new Date().getFullYear() }} Equipo Si. Todos los derechos reservados.
         </p>
         <div class="flex space-x-5">
           <a

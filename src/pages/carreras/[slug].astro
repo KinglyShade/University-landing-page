@@ -1,0 +1,93 @@
+---
+// PÁGINA: src/pages/carreras/[slug].astro
+
+// 1. IMPORTA TU ARRAY
+import { careers } from "../../DB/db.js";
+import MainLayout from "../../layouts/MainLayout.astro";
+import '../../styles/global.css';
+
+// 2. EL CEREBRO: getStaticPaths
+export function getStaticPaths() {
+  const todasLasCarreras = careers;
+
+  // 4. EL MAPEO
+  return todasLasCarreras.map((carrera) => {
+    return {
+      params: { slug: carrera.id },
+      props: { carrera },
+    };
+  });
+}
+
+// 5. RECIBIR LOS DATOS
+const { carrera } = Astro.props;
+---
+
+<MainLayout title={`UTNay - ${carrera.name}`}>
+
+  <div class="bg-gray-950 min-h-screen pb-20"> 
+  
+    <section
+      class="relative w-full h-80 flex items-center justify-center"
+      style={`background-image: url(${carrera.bgImg}); background-size: cover; background-position: center;`}
+    >
+      <div class="absolute inset-0 bg-black bg-opacity-80"></div>
+      
+      <h1 class="relative text-white text-5xl md:text-6xl font-extrabold text-center px-4 z-10 tracking-wide">
+        {carrera.name}
+      </h1>
+    </section>
+
+    <div class="container mx-auto p-6 md:p-10 -mt-20 relative z-20">
+
+      <div class="bg-gray-800 shadow-2xl rounded-xl p-8 lg:p-12 border-t-4 border-indigo-400">
+        
+        <div class="flex flex-col md:flex-row gap-8 items-start">
+          
+          <div class="flex-shrink-0 w-32 h-32 md:w-40 md:h-40 p-3 border border-gray-700 rounded-lg bg-gray-900 shadow-lg">
+            <img
+              class="w-full h-full object-contain"
+              src={carrera.img}
+              alt={`Logo de ${carrera.name}`}
+              loading="lazy"
+            />
+          </div>
+
+          <div>
+            <h2 class="text-3xl font-bold text-indigo-300 mb-4 md:mt-0 mt-4">Perfil de la Carrera</h2>
+            <p class="text-gray-300 leading-relaxed text-lg">
+              {carrera.description}
+            </p>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="mt-16">
+        <h3 class="text-3xl font-extrabold text-white mb-8 border-b-2 pb-3 border-indigo-400">
+          Información Clave
+        </h3>
+        
+        <dl class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          
+          <div class="bg-gray-900 p-8 rounded-xl shadow-xl border-b-4 border-indigo-500 hover:bg-gray-700 transition duration-300">
+            <dt class="text-xl font-semibold text-indigo-400">Duración</dt>
+            <dd class="mt-2 text-4xl font-extrabold text-white">{carrera.duration}</dd>
+          </div>
+          
+          <div class="bg-gray-900 p-8 rounded-xl shadow-xl border-b-4 border-indigo-500 hover:bg-gray-700 transition duration-300">
+            <dt class="text-xl font-semibold text-indigo-400">Modalidad</dt>
+            <dd class="mt-2 text-4xl font-extrabold text-white">{carrera.modality}</dd>
+          </div>
+          
+          <div class="bg-gray-900 p-8 rounded-xl shadow-xl border-b-4 border-indigo-500 hover:bg-gray-700 transition duration-300">
+            <dt class="text-xl font-semibold text-indigo-400">Campo Laboral</dt>
+            <dd class="mt-2 text-lg font-medium text-gray-300">{carrera.field}</dd>
+          </div>
+          
+        </dl>
+      </div>
+      
+    </div>
+  </div>
+</MainLayout>

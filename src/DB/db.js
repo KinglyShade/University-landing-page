@@ -11,6 +11,7 @@ import mercadotecniaLogo from '../assets/images/carreras/LINMCIRCULO_png.png';
 
 export const careers = [
   {
+    id:"gastronomia", // OK
     name: "Gastronomía",
     img: gastronomiaLogo.src,
     background: "",
@@ -20,7 +21,8 @@ export const careers = [
     field: "Restaurantes, hoteles, catering, consultoría culinaria."
   },
   {
-    name: "Tecnologías de la Información ",
+    id: "tecnologias-informacion", // <-- AÑADIDO
+    name: "Tecnologías de la Información", // <-- CORREGIDO (tenía un espacio extra al final)
     img: tiLogoN.src,
     background: "",
     description: "Impulsando la innovación digital.",
@@ -29,6 +31,7 @@ export const careers = [
     field: "Desarrollo de software, redes, ciberseguridad y soporte técnico."
   },
   {
+    id: "administracion", // <-- AÑADIDO
     name: "Administración",
     img: administracionLogo.src,
     background: "",
@@ -38,6 +41,7 @@ export const careers = [
     field: "Empresas, gestión de recursos humanos, contabilidad, finanzas."
   },
   {
+    id: "mecatronica", // <-- AÑADIDO
     name: "Mecatrónica",
     img: mecatronicaLogo.src,
     background: "",
@@ -47,6 +51,7 @@ export const careers = [
     field: "Robótica, control de procesos, mantenimiento industrial."
   },
   {
+    id: "logistica-internacional", // <-- AÑADIDO
     name: "Logística Internacional",
     img: logisticaLogo.src,
     background: "",
@@ -56,6 +61,7 @@ export const careers = [
     field: "Comercio exterior, transporte, cadenas de suministro."
   },
   {
+    id: "turismo", // <-- AÑADIDO
     name: "Turismo",
     img: turismoLogo.src,
     background: "",
@@ -65,6 +71,7 @@ export const careers = [
     field: "Hotelería, agencias de viajes, guías turísticos, gestión cultural."
   },
   {
+    id: "mantenimiento-industrial", // <-- AÑADIDO
     name: "Mantenimiento Industrial",
     img: mantenimientoLogo.src,
     background: "",
@@ -74,6 +81,7 @@ export const careers = [
     field: "Plantas industriales, gestión de mantenimiento, maquinaria pesada."
   },
   {
+    id: "seguridad-publica", // <-- AÑADIDO
     name: "Seguridad Pública",
     img: seguridadLogo.src,
     background: "",
@@ -82,8 +90,8 @@ export const careers = [
     modality: "Presencial",
     field: "Corporaciones de seguridad, investigación forense, gestión pública."
   },
-
   {
+    id: "innovacion-negocios-mercadotecnia", // <-- AÑADIDO
     name: "Innovación de Negocios y Mercadotecnia",
     img: mercadotecniaLogo.src,
     background: "",
