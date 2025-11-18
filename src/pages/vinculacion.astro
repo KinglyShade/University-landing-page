@@ -1,27 +1,74 @@
 ---
-
-import HeaderFlotante from '../components/vue/FloatHeader.vue';
+// Importaciones de Layout y Datos
 import MainLayout from '../layouts/MainLayout.astro';
+import { empresas } from '../DB/empresas.js';
+import '../styles/global.css';
+// Importaciones de Componentes Vue
+import HeaderFlotante from '../components/vue/FloatHeader.vue';
 import Footer from '../components/vue/footer.vue';
-import VinculacionHero from '../components/vue/VinculacionHero.vue'; // Import agregado para el componente faltante
-// import EmpresasAliadasSlider from '../components/vue/EmpresasAliadasSlider.vue'; // Import agregado para el componente faltante
+import VinculacionHero from '../components/vue/VinculacionHero.vue';
+import InfSliderVinculacion from '../components/vue/InfSliderVinculacion.vue';
+import SliderVinculacion from '../components/vue/SliderVinculacion.vue';
 ---
+
 <MainLayout title="UTNay - Vinculación Empresarial">
-    <HeaderFlotante client:load />
-    <section id="vinculacion" class="h-screen relative">
-        <div class="absolute inset-0 bg-black/50"></div>
+
+    <section id="vinculacion-hero" class="relative h-[80vh] md:h-[90vh]">
+        <div class="absolute inset-0 bg-black/50 z-10"></div>
         <VinculacionHero client:load />
     </section>
-    <div class="text-center bg-white py-20 px-4 ">
-        <h2 class="text-4xl font-bold text-gray-800 mb-2">
-            Empresas Aliadas
-        </h2>
-        <p class="text-gray-600 mb-8">
-            Conoce a nuestras empresas colaboradoras que impulsan el desarrollo profesional de nuestros estudiantes.
-        </p>
-        <div class="max-w-8xl mx-auto">
-            <!-- <EmpresasAliadasSlider client:load /> -->
+
+    <section class="bg-gray-50 py-16 md:py-24 px-4 sm:px-6 lg:px-8 text-center">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">
+                🤝 Empresas Aliadas
+            </h2>
+            <p class="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
+                Conoce a nuestras empresas colaboradoras que impulsan el desarrollo profesional de nuestros estudiantes.
+            </p>
+            
+            <div class="mb-16">
+                <InfSliderVinculacion logos={empresas} client:load />
+            </div>
+
+            <div>
+                <SliderVinculacion client:load />
+            </div>
         </div>
-    </div>
+    </section>
+
+    <hr class="border-gray-200" />
+
+    <section class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h3 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-primary-500 pb-2">
+                 Incubadora de Negocios UTNay
+            </h3>
+            <p class="text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
+                La **Incubadora de Negocios** de la Universidad Tecnológica de Nayarit (UTNay) es un espacio dedicado a fomentar el emprendimiento y apoyar a los estudiantes y egresados en la creación y desarrollo de sus propios negocios. A través de programas de capacitación, asesoría personalizada y acceso a recursos, la incubadora busca impulsar ideas innovadoras y convertirlas en proyectos viables que contribuyan al crecimiento económico y social de la región.
+            </p>
+            <p class="text-base md:text-lg text-gray-700 leading-relaxed">
+                Ofrecemos una variedad de servicios, incluyendo talleres sobre planificación empresarial, marketing, finanzas y gestión de proyectos. Además, proporcionamos un entorno colaborativo donde los emprendedores pueden conectarse con **mentores**, expertos de la industria y otros estudiantes. Al participar, los estudiantes tienen la oportunidad de adquirir habilidades prácticas y acceder a una red de contactos crucial para el éxito de sus emprendimientos.
+            </p>
+        </div>
+    </section>
+    
+    <hr class="border-gray-200" />
+
+    <section class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <h3 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-secondary-500 pb-2">
+                Bolsa de Trabajo UTNay
+            </h3>
+            <p class="text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
+                La **Bolsa de Trabajo** de la UTNay es una plataforma diseñada para conectar a nuestros estudiantes y egresados con oportunidades laborales en diversas industrias. Este servicio facilita la búsqueda de empleo al ofrecer un espacio donde las empresas pueden publicar vacantes y los candidatos pueden postularse directamente a través del portal.
+            </p>
+            <p class="text-base md:text-lg text-gray-700 leading-relaxed">
+                No solo beneficia a los estudiantes al proporcionarles acceso a ofertas de empleo relevantes, sino que también apoya a las empresas al permitirles encontrar **talento calificado y motivado**. Además, la plataforma ofrece recursos adicionales, como consejos para la elaboración de currículums, preparación para entrevistas y desarrollo profesional.
+            </p>
+        </div>
+    </section>
+
+    <HeaderFlotante client:load />
     <Footer client:only="vue" />
 </MainLayout>

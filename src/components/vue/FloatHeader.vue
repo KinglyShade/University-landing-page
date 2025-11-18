@@ -1,3 +1,6 @@
+/*
+maldito insecto ya me tienes harto
+*/
 <template>
   <header 
     :class="{ 'scrolled': isScrolled }"
@@ -16,34 +19,60 @@
 
         <!-- Links de escritorio con dropdowns -->
         <div class="hidden md:flex space-x-8">
-          <div
-            v-for="(item, index) in menuItems"
-            :key="index"
-            class="relative group"
-            @mouseover="openDropdown(index)"
-            @mouseleave="closeDropdown(index)"
-          >
+          <div class="relative group">
             <button class="hover:text-green-200 transition-colors focus:outline-none">
-              {{ item.label }}
-              <svg v-if="item.subItems" class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              Carreras
+              <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <transition name="dropdown">
-              <ul
-                v-if="item.subItems"
-                v-show="activeDropdown === index"
-                class="absolute left-0 mt-2 w-56 bg-gray-900 rounded-md shadow-lg z-50"
-              >
-                <li v-for="(sub, subIndex) in item.subItems" :key="subIndex">
-                  <a :href="sub.href" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">
-                    {{ sub.label }}
-                  </a>
-                </li>
-              </ul>
-            </transition>
+            <ul class="absolute left-0 mt-2 w-56 bg-gray-900 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+              <li><a href="#ingenieria" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Ingeniería en Sistemas</a></li>
+              <li><a href="#industrial" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Ingeniería Industrial</a></li>
+              <li><a href="#administracion" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Lic. en Administración</a></li>
+            </ul>
           </div>
-          <!-- Becas como enlace directo -->
+
+          <div class="relative group">
+            <button class="hover:text-green-200 transition-colors focus:outline-none">
+              Contacto
+              <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <ul class="absolute left-0 mt-2 w-56 bg-gray-900 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+              <li><a href="#contacto-email" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Email</a></li>
+              <li><a href="#contacto-telefono" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Teléfono</a></li>
+              <li><a href="#contacto-ubicacion" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Ubicación</a></li>
+            </ul>
+          </div>
+
+          <div class="relative group">
+            <button class="hover:text-green-200 transition-colors focus:outline-none">
+              Noticias
+              <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <ul class="absolute left-0 mt-2 w-56 bg-gray-900 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+              <li><a href="#evento1" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Feria de Empleo 2025</a></li>
+              <li><a href="#evento2" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Conferencia de IA</a></li>
+            </ul>
+          </div>
+
+          <div class="relative group">
+            <button class="hover:text-green-200 transition-colors focus:outline-none">
+              Vinculación
+              <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <ul class="absolute left-0 mt-2 w-56 bg-gray-900 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+              <li><a href="/vinculacion" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Empresas aliadas</a></li>
+              <li><a href="/vinculacion#practicas" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Prácticas profesionales</a></li>
+            </ul>
+          </div>
+
           <a href="https://www.utnay.edu.mx/becas.html" class="hover:text-green-200 transition-colors">Becas</a>
         </div>
 
