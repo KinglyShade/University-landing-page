@@ -2,7 +2,10 @@
   <div ref="scroller" class="scroller" data-animated="true">
     <ul ref="track" class="scroller__track">
       <li v-for="logo in logos" :key="logo.alt">
-        <img :src="logo.src" :alt="logo.alt" />
+        <a v-if="logo.href" :href="logo.href" target="_blank" rel="noopener noreferrer" class="block">
+          <img :src="logo.src" :alt="logo.alt" />
+        </a>
+        <img v-else :src="logo.src" :alt="logo.alt" />
       </li>
 
       <!-- Duplicado para loop continuo -->
@@ -11,32 +14,42 @@
         :key="`${logo.alt}-duplicate`"
         aria-hidden="true"
       >
-        <img :src="logo.src" :alt="logo.alt" />
+        <a v-if="logo.href" :href="logo.href" target="_blank" rel="noopener noreferrer" class="block">
+          <img :src="logo.src" :alt="logo.alt" />
+        </a>
+        <img v-else :src="logo.src" :alt="logo.alt" />
       </li>
     </ul>
   </div>
 </template>
 
-<script setup>
-import { defineProps, ref, onMounted, onBeforeUnmount, nextTick } from 'vue';
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue';
 
-const props = defineProps({
-  logos: { type: Array, required: true }
-});
+interface Logo {
+  src: string;
+  alt: string;
+  href?: string;
+  descripcion?: string;
+}
 
-const scroller = ref(null);
-const track = ref(null);
-let resizeObserver;
+const props = defineProps<{
+  logos: Logo[]
+}>();
+
+const scroller = ref<HTMLElement | null>(null);
+const track = ref<HTMLElement | null>(null);
+let resizeObserver: ResizeObserver | null = null;
 
 function waitForImagesToLoad() {
   if (!track.value) return Promise.resolve();
   const imgs = Array.from(track.value.querySelectorAll('img'));
   if (!imgs.length) return Promise.resolve();
   return Promise.all(
-    imgs.map(img => new Promise(res => {
+    imgs.map(img => new Promise<void>(res => {
       if (img.complete) return res();
-      img.addEventListener('load', res, { once: true });
-      img.addEventListener('error', res, { once: true });
+      img.addEventListener('load', () => res(), { once: true });
+      img.addEventListener('error', () => res(), { once: true });
     }))
   );
 }
@@ -105,7 +118,7 @@ onBeforeUnmount(() => {
 
 /* Contenedor que recorta el contenido */
 .scroller {
-  width: 100%;
+  width: fixed;
   overflow: hidden;
   mask: linear-gradient(to right, transparent 0, black 20px, black 98%, transparent 100%);
   -webkit-mask: linear-gradient(to right, transparent 0, black 20px, black 98%, transparent 100%);
@@ -155,11 +168,11 @@ onBeforeUnmount(() => {
 
 /* Imagen: gris por defecto, forzar transparencia y evitar artefactos */
 .scroller__track img {
-  height: 100px;
+  height: 80px;
   width: auto;
   max-width: none;
   display: block;
-
+  
   /* Estado por defecto: gris y un poco más oscuro */
   -webkit-filter: grayscale(1) brightness(0.92) contrast(0.95);
   filter: grayscale(1) brightness(0.92) contrast(0.95);

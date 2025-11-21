@@ -14,23 +14,21 @@ maldito insecto ya me tienes harto
           class="flex-shrink-0 transition-all duration-500"
           :class="isScrolled ? 'w-12 h-12' : 'w-14 h-14'"
         >
-          <img src="/src/assets/images/utn.png" alt="UTNay" class="w-full h-full object-contain" >
+          <a href="/">
+            <img src="/src/assets/images/utn.png" alt="UTNay" class="w-full h-full object-contain" >
+          </a>
         </div>
 
         <!-- Links de escritorio con dropdowns -->
         <div class="hidden md:flex space-x-8">
           <div class="relative group">
-            <button class="hover:text-green-200 transition-colors focus:outline-none">
+            <a href="/#carreras" class="hover:text-green-200 transition-colors focus:outline-none">
               Carreras
               <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
-            </button>
-            <ul class="absolute left-0 mt-2 w-56 bg-gray-900 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-              <li><a href="#ingenieria" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Ingeniería en Sistemas</a></li>
-              <li><a href="#industrial" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Ingeniería Industrial</a></li>
-              <li><a href="#administracion" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Lic. en Administración</a></li>
-            </ul>
+            </a>
+            
           </div>
 
           <div class="relative group">
@@ -40,11 +38,8 @@ maldito insecto ya me tienes harto
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <ul class="absolute left-0 mt-2 w-56 bg-gray-900 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-              <li><a href="#contacto-email" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Email</a></li>
-              <li><a href="#contacto-telefono" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Teléfono</a></li>
-              <li><a href="#contacto-ubicacion" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Ubicación</a></li>
-            </ul>
+            
+            
           </div>
 
           <div class="relative group">
@@ -55,8 +50,8 @@ maldito insecto ya me tienes harto
               </svg>
             </button>
             <ul class="absolute left-0 mt-2 w-56 bg-gray-900 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-              <li><a href="#evento1" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Feria de Empleo 2025</a></li>
-              <li><a href="#evento2" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Conferencia de IA</a></li>
+              <li><a href="/#noticias" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Feria de Empleo 2025</a></li>
+              <li><a href="/#noticias" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Conferencia de IA</a></li>
             </ul>
           </div>
 
@@ -68,12 +63,12 @@ maldito insecto ya me tienes harto
               </svg>
             </button>
             <ul class="absolute left-0 mt-2 w-56 bg-gray-900 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-              <li><a href="/vinculacion" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Empresas aliadas</a></li>
-              <li><a href="/vinculacion#practicas" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Prácticas profesionales</a></li>
+              <li><a href="/vinculacion#empresas" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Empresas aliadas</a></li>
+              <li><a href="/vinculacion#bolsa" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Prácticas profesionales</a></li>
             </ul>
           </div>
 
-          <a href="https://www.utnay.edu.mx/becas.html" class="hover:text-green-200 transition-colors">Becas</a>
+          <a href="/scholarships" class="hover:text-green-200 transition-colors">Becas</a>
         </div>
 
         <!-- Botón hamburguesa móvil -->
@@ -127,31 +122,31 @@ const menuItems = ref([
  {
     label: 'Acerca de',
     subItems: [
-      { label: 'Misión y Visión', href: '#mision' },
-      { label: 'Historia', href: '#historia' },
+      { label: 'Misión y Visión', href: '/#mision' },
+      { label: 'Historia', href: '/#historia' },
     ]
   },
   {
     label: 'Noticias',
     subItems: [
-      { label: 'Feria de Empleo 2025', href: '#evento1' },
-      { label: 'Conferencia de IA', href: '#evento2' },
+      { label: 'Feria de Empleo 2025', href: '/#noticias' },
+      { label: 'Conferencia de IA', href: '/#noticias' },
     ]
   },
 
   {
     label: 'Vinculación',
     subItems: [
-      { label: 'Empresas aliadas', href: '/vinculacion' }, // ✅ Correcto
-      { label: 'Prácticas profesionales', href: '/vinculacion#practicas' }, // ⚠️ Mira la nota abajo
+      { label: 'Empresas aliadas', href: '/vinculacion#empresas' }, // ✅ Correcto
+      { label: 'Prácticas profesionales', href: '/vinculacion#bolsa' }, // ⚠️ Mira la nota abajo
     ]
   },
   {
     label: 'Carreras',
     subItems: [
-      { label: 'Ingeniería en Sistemas', href: '#ingenieria' },
-      { label: 'Ingeniería Industrial', href: '#industrial' },
-      { label: 'Lic. en Administración', href: '#administracion' },
+      { label: 'Ingeniería en Sistemas', href: '/#carreras' },
+      { label: 'Ingeniería Industrial', href: '/#carreras' },
+      { label: 'Lic. en Administración', href: '/#carreras' },
     ]
   },
   

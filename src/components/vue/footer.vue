@@ -91,7 +91,7 @@
         </p>
         <div class="flex space-x-5">
           <a
-            href="#"
+            href="https://www.facebook.com/UTNAY/?locale=es_LA"
             class="text-gray-400 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-1 text-2xl"
           >
             <Icon icon="fa-brands:facebook" />
@@ -103,7 +103,7 @@
             <Icon icon="fa-brands:twitter" />
           </a>
           <a
-            href="#"
+            href="https://www.instagram.com/utnay/"
             class="text-gray-400 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-1 text-2xl"
           >
             <Icon icon="fa-brands:instagram" />

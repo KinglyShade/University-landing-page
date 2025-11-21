@@ -1,5 +1,5 @@
 <template>
-  <section class="relative h-screen flex items-center justify-center overflow-hidden bg-gray-900">
+  <section class="relative h-full flex items-center justify-center overflow-hidden bg-gray-900">
     <!-- Fondo con imágenes (puedes usar un carousel o múltiples capas para animación) -->
     <div class="absolute inset-0 z-0">
       <!-- Ejemplo de imagen de fondo; cambia por tus imágenes reales -->
