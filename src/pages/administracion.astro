@@ -1,6 +1,7 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import Footer from "../components/vue/footer.vue";
+import CareerHero from "../components/vue/CareerHero.vue";
 import { careers } from "../DB/db.js";
 import "../styles/global.css";
 
@@ -11,17 +12,16 @@ if (!career) {
 ---
 
 <MainLayout title={`${career.name} - Universidad Tecnológica de Nayarit`}>
-  <section class="relative h-[80vh] md:h-[90vh] flex items-center justify-center bg-gradient-to-br from-emerald-900 via-emerald-700 to-slate-900 text-white overflow-hidden">
-    <div class="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_top,_#22c55e_0,_transparent_55%),_radial-gradient(circle_at_bottom,_#0ea5e9_0,_transparent_55%)]"></div>
-    <div class="relative z-10 max-w-4xl px-6 text-center">
-      <p class="uppercase tracking-[0.2em] text-emerald-200 text-xs md:text-sm mb-3">Oferta educativa</p>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
-        {career.name}
-      </h1>
-      <p class="text-sm md:text-base text-emerald-50/90 max-w-2xl mx-auto">
-        {career.description}
-      </p>
-    </div>
+  <section id="hero-administracion" class="relative h-[80vh] md:h-[90vh]">
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <CareerHero
+      client:load
+      eyebrow="Oferta educativa"
+      title={career.name}
+      subtitle={career.description}
+      gradientClass="bg-gradient-to-br from-emerald-900 via-emerald-700 to-slate-900"
+      
+    />
   </section>
 
   <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white text-gray-900">
