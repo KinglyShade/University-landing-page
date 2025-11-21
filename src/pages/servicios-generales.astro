@@ -1,0 +1,183 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Footer from "../components/vue/footer.vue";
+import PageHeroTemplate from "../components/vue/PageHeroTemplate.vue";
+import "../styles/global.css";
+---
+
+<MainLayout title="Servicios Generales - Universidad Tecnológica de Nayarit">
+  <section id="servicios-generales-hero" class="relative h-[80vh] md:h-[90vh]">
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <PageHeroTemplate
+      client:load
+      eyebrow="Vida en el campus"
+      title="Servicios Generales UTNay"
+      subtitle="El área de Servicios Generales mantiene en operación la infraestructura, áreas verdes y espacios comunes del campus para ofrecer un entorno seguro y funcional."
+      imageSrc="https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg"
+    />
+  </section>
+
+  <section class="py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-white text-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 border-l-4 border-emerald-500 pl-4">
+        ¿Qué hacemos en Servicios Generales?
+      </h2>
+      <p class="text-base md:text-lg text-gray-700 mb-10 max-w-3xl">
+        El <strong class="font-semibold">Departamento de Servicios Generales</strong> se encarga de la operación diaria del campus: mantenimiento, limpieza, infraestructura, seguridad y logística. Nuestro trabajo suele ser invisible cuando todo funciona bien, pero es clave para tu experiencia universitaria.
+      </p>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <article class="rounded-3xl border border-gray-100 bg-gray-50 p-6 shadow-sm">
+          <h3 class="text-lg font-semibold mb-2">Mantenimiento y limpieza</h3>
+          <p class="text-sm text-gray-700 mb-3">
+            Atendemos el mantenimiento preventivo y correctivo de aulas, laboratorios, áreas comunes y sanitarios, así como la limpieza de espacios para mantener un ambiente agradable y seguro.
+          </p>
+          <ul class="text-xs text-gray-700 space-y-1 list-disc list-inside">
+            <li>Revisión de instalaciones eléctricas e hidráulicas.</li>
+            <li>Limpieza diaria de salones y sanitarios.</li>
+            <li>Atención a reportes de daños en mobiliario.</li>
+          </ul>
+        </article>
+
+        <article class="rounded-3xl border border-gray-100 bg-gray-50 p-6 shadow-sm">
+          <h3 class="text-lg font-semibold mb-2">Infraestructura y áreas verdes</h3>
+          <p class="text-sm text-gray-700 mb-3">
+            Cuidamos las áreas verdes, estacionamientos, pasillos y espacios abiertos del campus, asegurando un entorno agradable y funcional.
+          </p>
+          <ul class="text-xs text-gray-700 space-y-1 list-disc list-inside">
+            <li>Cuidado y riego de jardines.</li>
+            <li>Señalética interna y externa.</li>
+            <li>Supervisión de mobiliario urbano.</li>
+          </ul>
+        </article>
+
+        <article class="rounded-3xl border border-gray-100 bg-gray-50 p-6 shadow-sm">
+          <h3 class="text-lg font-semibold mb-2">Seguridad y acceso</h3>
+          <p class="text-sm text-gray-700 mb-3">
+            Coordinación con el personal de vigilancia para el control de accesos y la atención de incidencias dentro del campus.
+          </p>
+          <ul class="text-xs text-gray-700 space-y-1 list-disc list-inside">
+            <li>Control de accesos vehiculares y peatonales.</li>
+            <li>Apoyo en eventos institucionales.</li>
+            <li>Atención a incidentes en coordinación con autoridades.</li>
+          </ul>
+        </article>
+
+        <article class="rounded-3xl border border-gray-100 bg-gray-50 p-6 shadow-sm">
+          <h3 class="text-lg font-semibold mb-2">Apoyo logístico</h3>
+          <p class="text-sm text-gray-700 mb-3">
+            Organización y apoyo logístico en eventos académicos, culturales y deportivos dentro de la universidad.
+          </p>
+          <ul class="text-xs text-gray-700 space-y-1 list-disc list-inside">
+            <li>Montaje de escenarios y espacios.</li>
+            <li>Préstamo y acomodo de mobiliario.</li>
+            <li>Coordinación con otras áreas académicas y administrativas.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">
+        Reporte de incidencias y solicitudes
+      </h2>
+      <p class="text-sm md:text-base text-gray-700 mb-8 max-w-3xl">
+        Si detectas algún desperfecto o situación relacionada con la infraestructura, limpieza o seguridad del campus, repórtalo de forma clara para que podamos atenderlo a la brevedad.
+      </p>
+
+      <div class="grid gap-8 md:grid-cols-[2fr,1.3fr] items-start">
+        <form
+          method="post"
+          action="/api/servicios-generales"
+          class="space-y-4 bg-white rounded-3xl border border-gray-100 p-6 shadow-sm"
+        >
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label class="block text-xs font-medium text-gray-600 mb-1" for="sg-name">Nombre completo</label>
+              <input
+                id="sg-name"
+                name="name"
+                type="text"
+                class="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+                placeholder="Opcional"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-600 mb-1" for="sg-role">Rol en la UTNay</label>
+              <select
+                id="sg-role"
+                name="role"
+                class="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+              >
+                <option>Estudiante</option>
+                <option>Docente</option>
+                <option>Personal administrativo</option>
+                <option>Visitante</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-gray-600 mb-1" for="sg-location">Ubicación del incidente</label>
+            <input
+              id="sg-location"
+              name="location"
+              type="text"
+              class="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+              placeholder="Edificio, aula, laboratorio, área verde, etc."
+            />
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-gray-600 mb-1" for="sg-type">Tipo de solicitud</label>
+            <select
+              id="sg-type"
+              name="requestType"
+              class="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+            >
+              <option>Mantenimiento</option>
+              <option>Limpieza</option>
+              <option>Seguridad</option>
+              <option>Infraestructura</option>
+              <option>Otro</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-gray-600 mb-1" for="sg-description">Descripción</label>
+            <textarea
+              id="sg-description"
+              name="description"
+              rows="4"
+              required
+              class="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+              placeholder="Describe claramente el problema o solicitud."
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-5 py-2 text-xs md:text-sm font-semibold text-white shadow-md hover:shadow-lg hover:from-emerald-400 hover:to-teal-400 transition"
+          >
+            Enviar solicitud
+          </button>
+        </form>
+
+        <aside class="space-y-4 text-xs md:text-sm text-gray-700">
+          <div class="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
+            <h3 class="font-semibold mb-2">Tiempos de atenci 1dn</h3>
+            <p>Los tiempos de respuesta pueden variar dependiendo de la naturaleza del incidente y la carga de trabajo del  19rea.</p>
+          </div>
+          <div class="rounded-3xl border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
+            <h3 class="font-semibold mb-2">Contacto directo</h3>
+            <p>Para asuntos urgentes, acude directamente a la oficina de Servicios Generales o comun 1dcate al tel 19fono institucional indicando el tipo de incidente.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Footer client:only="vue" />
+</MainLayout>

@@ -16,12 +16,17 @@ defineProps({
   backgroundImage: {
     type: String,
     required: true,
-  }
+  },
+  href: {
+    type: String,
+    default: '#',
+  },
 });
 </script>
 
 <template>
-  <div
+  <a
+    :href="href"
     class="
       group relative flex items-center justify-center 
       h-[180px] md:h-[150px] 
@@ -94,5 +99,5 @@ defineProps({
         {{ description }}
       </p>
     </div>
-  </div>
+  </a>
 </template>

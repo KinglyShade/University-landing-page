@@ -1,0 +1,48 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Footer from "../components/vue/footer.vue";
+import PageHeroTemplate from "../components/vue/PageHeroTemplate.vue";
+import "../styles/global.css";
+---
+
+<MainLayout title="Admisiones - Universidad Tecnológica de Nayarit">
+  <section id="admisiones-hero" class="relative h-[80vh] md:h-[90vh]">
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <PageHeroTemplate
+      client:load
+      eyebrow="Aspirantes de nuevo ingreso"
+      title="Proceso de admisión UTNay"
+      subtitle="Conoce las etapas generales para integrarte como estudiante a la Universidad Tecnológica de Nayarit. Verifica siempre la convocatoria vigente."
+      gradientClass="bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900"
+    />
+  </section>
+
+  <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white text-gray-900">
+    <div class="max-w-6xl mx-auto grid gap-10 md:grid-cols-[1.7fr,1.3fr] items-start">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">Pasos generales</h2>
+        <ol class="space-y-4 text-sm md:text-base text-gray-700 list-decimal list-inside">
+          <li><span class="font-semibold">Revisa la convocatoria</span> de ingreso vigente publicada en el sitio oficial.</li>
+          <li><span class="font-semibold">Realiza tu pre-registro</span> en línea y conserva tu folio.</li>
+          <li><span class="font-semibold">Cubre la cuota</span> correspondiente al examen de admisión en las fechas indicadas.</li>
+          <li><span class="font-semibold">Presenta el examen</span> en la sede, fecha y horario asignados.</li>
+          <li><span class="font-semibold">Consulta los resultados</span> en la lista de aspirantes aceptados.</li>
+          <li><span class="font-semibold">Completa tu reinscripción</span> entregando la documentación requerida.</li>
+        </ol>
+      </div>
+
+      <aside class="space-y-4 text-xs md:text-sm text-gray-700">
+        <div class="rounded-3xl border border-gray-100 bg-gray-50 p-5 shadow-sm">
+          <h3 class="font-semibold mb-2">Convocatoria</h3>
+          <p>Enlaza aquí la convocatoria oficial y las plataformas de registro una vez que estén definidas en tu proyecto.</p>
+        </div>
+        <div class="rounded-3xl border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
+          <h3 class="font-semibold mb-2">Soporte a aspirantes</h3>
+          <p>Para dudas sobre requisitos específicos, fechas o documentación, canaliza a la Coordinación de Servicios Escolares o al área de Admisiones.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <Footer client:only="vue" />
+</MainLayout>

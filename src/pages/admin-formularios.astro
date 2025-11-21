@@ -1,0 +1,308 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Footer from "../components/vue/footer.vue";
+import "../styles/global.css";
+---
+
+<MainLayout title="Panel de formularios - UTNay">
+  <section class="pt-28 pb-10 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white">
+    <div class="max-w-6xl mx-auto">
+      <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Panel de formularios</h1>
+      <p class="text-sm md:text-base text-emerald-100/90 max-w-2xl">
+        Revisión rápida de envíos de los formularios de Contáctanos, Servicios Generales,
+        Servicios Informáticos y Buzón de Quejas y Sugerencias.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-10 px-4 sm:px-6 lg:px-8 bg-white text-gray-900">
+    <div class="max-w-6xl mx-auto space-y-10">
+      <div class="space-y-3">
+        <h2 class="text-xl md:text-2xl font-bold">Contáctanos</h2>
+        <p class="text-xs md:text-sm text-gray-600">
+          Últimos mensajes recibidos desde el formulario de contacto.
+        </p>
+        <div class="overflow-x-auto rounded-2xl border border-gray-100 bg-gray-50">
+          <table class="min-w-full text-xs md:text-sm">
+            <thead class="bg-gray-100 text-gray-700">
+              <tr>
+                <th class="px-3 py-2 text-left font-semibold">Nombre</th>
+                <th class="px-3 py-2 text-left font-semibold">Correo</th>
+                <th class="px-3 py-2 text-left font-semibold">Asunto</th>
+                <th class="px-3 py-2 text-left font-semibold">Estado</th>
+                <th class="px-3 py-2 text-left font-semibold">Fecha</th>
+                <th class="px-3 py-2 text-left font-semibold">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="admin-contacto-body" class="divide-y divide-gray-100 bg-white"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <h2 class="text-xl md:text-2xl font-bold">Servicios Generales</h2>
+        <p class="text-xs md:text-sm text-gray-600">
+          Reportes de incidencias relacionados con infraestructura, mantenimiento y limpieza.
+        </p>
+        <div class="overflow-x-auto rounded-2xl border border-gray-100 bg-gray-50">
+          <table class="min-w-full text-xs md:text-sm">
+            <thead class="bg-gray-100 text-gray-700">
+              <tr>
+                <th class="px-3 py-2 text-left font-semibold">Nombre</th>
+                <th class="px-3 py-2 text-left font-semibold">Rol</th>
+                <th class="px-3 py-2 text-left font-semibold">Ubicación</th>
+                <th class="px-3 py-2 text-left font-semibold">Tipo</th>
+                <th class="px-3 py-2 text-left font-semibold">Estado</th>
+                <th class="px-3 py-2 text-left font-semibold">Fecha</th>
+                <th class="px-3 py-2 text-left font-semibold">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="admin-sg-body" class="divide-y divide-gray-100 bg-white"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <h2 class="text-xl md:text-2xl font-bold">Servicios Informáticos</h2>
+        <p class="text-xs md:text-sm text-gray-600">
+          Tickets de soporte técnico levantados desde el formulario de servicios informáticos.
+        </p>
+        <div class="overflow-x-auto rounded-2xl border border-gray-100 bg-gray-50">
+          <table class="min-w-full text-xs md:text-sm">
+            <thead class="bg-gray-100 text-gray-700">
+              <tr>
+                <th class="px-3 py-2 text-left font-semibold">Nombre</th>
+                <th class="px-3 py-2 text-left font-semibold">Correo</th>
+                <th class="px-3 py-2 text-left font-semibold">Tipo problema</th>
+                <th class="px-3 py-2 text-left font-semibold">Lugar</th>
+                <th class="px-3 py-2 text-left font-semibold">Estado</th>
+                <th class="px-3 py-2 text-left font-semibold">Fecha</th>
+                <th class="px-3 py-2 text-left font-semibold">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="admin-si-body" class="divide-y divide-gray-100 bg-white"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <h2 class="text-xl md:text-2xl font-bold">Quejas y Sugerencias</h2>
+        <p class="text-xs md:text-sm text-gray-600">
+          Mensajes recibidos en el buzón de quejas, sugerencias y reconocimientos.
+        </p>
+        <div class="overflow-x-auto rounded-2xl border border-gray-100 bg-gray-50">
+          <table class="min-w-full text-xs md:text-sm">
+            <thead class="bg-gray-100 text-gray-700">
+              <tr>
+                <th class="px-3 py-2 text-left font-semibold">Nombre</th>
+                <th class="px-3 py-2 text-left font-semibold">Rol</th>
+                <th class="px-3 py-2 text-left font-semibold">Tipo</th>
+                <th class="px-3 py-2 text-left font-semibold">Área</th>
+                <th class="px-3 py-2 text-left font-semibold">Desea respuesta</th>
+                <th class="px-3 py-2 text-left font-semibold">Estado</th>
+                <th class="px-3 py-2 text-left font-semibold">Fecha</th>
+                <th class="px-3 py-2 text-left font-semibold">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="admin-qs-body" class="divide-y divide-gray-100 bg-white"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer client:only="vue" />
+</MainLayout>
+
+<script is:inline>
+  const fmtFecha = (iso) => {
+    if (!iso) return "";
+    try {
+      return new Date(iso).toLocaleString("es-MX", {
+        dateStyle: "short",
+        timeStyle: "short",
+      });
+    } catch {
+      return iso;
+    }
+  };
+
+  function createActionButtons(base, id, statusCell) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "flex flex-wrap gap-1";
+
+    const btnAtender = document.createElement("button");
+    btnAtender.type = "button";
+    btnAtender.textContent = "Marcar atendido";
+    btnAtender.className =
+      "px-2 py-1 rounded-full text-[10px] bg-emerald-100 text-emerald-800 hover:bg-emerald-200";
+    btnAtender.onclick = async () => {
+      await fetch(`${base}/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "atendido" }),
+      });
+      if (statusCell) statusCell.textContent = "atendido";
+    };
+
+    const btnEliminar = document.createElement("button");
+    btnEliminar.type = "button";
+    btnEliminar.textContent = "Eliminar";
+    btnEliminar.className =
+      "px-2 py-1 rounded-full text-[10px] bg-red-100 text-red-800 hover:bg-red-200";
+    btnEliminar.onclick = async () => {
+      if (!confirm("¿Eliminar este registro?")) return;
+      await fetch(`${base}/${id}`, { method: "DELETE" });
+      const tr = btnEliminar.closest("tr");
+      if (tr) tr.remove();
+    };
+
+    wrapper.appendChild(btnAtender);
+    wrapper.appendChild(btnEliminar);
+    return wrapper;
+  }
+
+  async function loadSection({ endpoint, bodyId, mapRow }) {
+    const tbody = document.getElementById(bodyId);
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    try {
+      const res = await fetch(endpoint);
+      if (!res.ok) return;
+      const data = await res.json();
+      data.forEach((item) => {
+        const tr = document.createElement("tr");
+        mapRow(item, tr);
+        tbody.appendChild(tr);
+      });
+    } catch (e) {
+      console.error("Error cargando", endpoint, e);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    loadSection({
+      endpoint: "/api/contacto",
+      bodyId: "admin-contacto-body",
+      mapRow: (item, tr) => {
+        tr.className = "hover:bg-emerald-50/40";
+        const statusCell = document.createElement("td");
+        statusCell.className = "px-3 py-2 align-top";
+        statusCell.textContent = item.status || "nuevo";
+
+        tr.innerHTML = `
+          <td class="px-3 py-2 align-top">${item.name || ""}</td>
+          <td class="px-3 py-2 align-top">${item.email || ""}</td>
+          <td class="px-3 py-2 align-top text-xs">${item.subject || ""}</td>
+        `;
+        tr.appendChild(statusCell);
+
+        const fechaTd = document.createElement("td");
+        fechaTd.className = "px-3 py-2 align-top text-[11px] text-gray-500";
+        fechaTd.textContent = fmtFecha(item.createdAt);
+        tr.appendChild(fechaTd);
+
+        const accionesTd = document.createElement("td");
+        accionesTd.className = "px-3 py-2 align-top";
+        accionesTd.appendChild(createActionButtons("/api/contacto", item._id, statusCell));
+        tr.appendChild(accionesTd);
+      },
+    });
+
+    loadSection({
+      endpoint: "/api/servicios-generales",
+      bodyId: "admin-sg-body",
+      mapRow: (item, tr) => {
+        tr.className = "hover:bg-emerald-50/40";
+        const statusCell = document.createElement("td");
+        statusCell.className = "px-3 py-2 align-top";
+        statusCell.textContent = item.status || "nuevo";
+
+        tr.innerHTML = `
+          <td class="px-3 py-2 align-top">${item.name || ""}</td>
+          <td class="px-3 py-2 align-top">${item.role || ""}</td>
+          <td class="px-3 py-2 align-top text-xs">${item.location || ""}</td>
+          <td class="px-3 py-2 align-top text-xs">${item.requestType || ""}</td>
+        `;
+        tr.appendChild(statusCell);
+
+        const fechaTd = document.createElement("td");
+        fechaTd.className = "px-3 py-2 align-top text-[11px] text-gray-500";
+        fechaTd.textContent = fmtFecha(item.createdAt);
+        tr.appendChild(fechaTd);
+
+        const accionesTd = document.createElement("td");
+        accionesTd.className = "px-3 py-2 align-top";
+        accionesTd.appendChild(
+          createActionButtons("/api/servicios-generales", item._id, statusCell)
+        );
+        tr.appendChild(accionesTd);
+      },
+    });
+
+    loadSection({
+      endpoint: "/api/servicios-informaticos",
+      bodyId: "admin-si-body",
+      mapRow: (item, tr) => {
+        tr.className = "hover:bg-emerald-50/40";
+        const statusCell = document.createElement("td");
+        statusCell.className = "px-3 py-2 align-top";
+        statusCell.textContent = item.status || "nuevo";
+
+        tr.innerHTML = `
+          <td class="px-3 py-2 align-top">${item.name || ""}</td>
+          <td class="px-3 py-2 align-top">${item.email || ""}</td>
+          <td class="px-3 py-2 align-top text-xs">${item.problemType || ""}</td>
+          <td class="px-3 py-2 align-top text-xs">${item.location || ""}</td>
+        `;
+        tr.appendChild(statusCell);
+
+        const fechaTd = document.createElement("td");
+        fechaTd.className = "px-3 py-2 align-top text-[11px] text-gray-500";
+        fechaTd.textContent = fmtFecha(item.createdAt);
+        tr.appendChild(fechaTd);
+
+        const accionesTd = document.createElement("td");
+        accionesTd.className = "px-3 py-2 align-top";
+        accionesTd.appendChild(
+          createActionButtons("/api/servicios-informaticos", item._id, statusCell)
+        );
+        tr.appendChild(accionesTd);
+      },
+    });
+
+    loadSection({
+      endpoint: "/api/quejas-sugerencias",
+      bodyId: "admin-qs-body",
+      mapRow: (item, tr) => {
+        tr.className = "hover:bg-emerald-50/40";
+        const statusCell = document.createElement("td");
+        statusCell.className = "px-3 py-2 align-top";
+        statusCell.textContent = item.status || "nuevo";
+
+        tr.innerHTML = `
+          <td class="px-3 py-2 align-top">${item.name || ""}</td>
+          <td class="px-3 py-2 align-top">${item.role || ""}</td>
+          <td class="px-3 py-2 align-top text-xs">${item.messageType || ""}</td>
+          <td class="px-3 py-2 align-top text-xs">${item.area || ""}</td>
+          <td class="px-3 py-2 align-top text-xs">${
+            item.wantsResponse ? "Sí" : "No"
+          }</td>
+        `;
+        tr.appendChild(statusCell);
+
+        const fechaTd = document.createElement("td");
+        fechaTd.className = "px-3 py-2 align-top text-[11px] text-gray-500";
+        fechaTd.textContent = fmtFecha(item.createdAt);
+        tr.appendChild(fechaTd);
+
+        const accionesTd = document.createElement("td");
+        accionesTd.className = "px-3 py-2 align-top";
+        accionesTd.appendChild(
+          createActionButtons("/api/quejas-sugerencias", item._id, statusCell)
+        );
+        tr.appendChild(accionesTd);
+      },
+    });
+  });
+</script>

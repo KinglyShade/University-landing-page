@@ -27,16 +27,16 @@
           <h3 class="font-bold mb-4 uppercase tracking-wider">Navegación</h3>
           <ul class="space-y-2 text-gray-400">
             <li>
-              <a href="#" class="hover:text-white transition-colors hover:underline">Inicio</a>
+              <a href="/" class="hover:text-white transition-colors hover:underline">Inicio</a>
             </li>
             <li>
-              <a href="#" class="hover:text-white transition-colors hover:underline">Carreras</a>
+              <a href="/#carreras" class="hover:text-white transition-colors hover:underline">Carreras</a>
             </li>
             <li>
-              <a href="#" class="hover:text-white transition-colors hover:underline">Admisiones</a>
+              <a href="/admisiones" class="hover:text-white transition-colors hover:underline">Admisiones</a>
             </li>
             <li>
-              <a href="#" class="hover:text-white transition-colors hover:underline">Contacto</a>
+              <a href="/contacto" class="hover:text-white transition-colors hover:underline">Contacto</a>
             </li>
           </ul>
         </div>
@@ -50,13 +50,13 @@
           <h3 class="font-bold mb-4 uppercase tracking-wider">Recursos</h3>
           <ul class="space-y-2 text-gray-400">
             <li>
-              <a href="#" class="hover:text-white transition-colors hover:underline">Blog</a>
+              <a href="/scholarships" class="hover:text-white transition-colors hover:underline">Becas</a>
             </li>
             <li>
-              <a href="#" class="hover:text-white transition-colors hover:underline">Noticias</a>
+              <a href="/vinculacion" class="hover:text-white transition-colors hover:underline">Vinculación</a>
             </li>
             <li>
-              <a href="#" class="hover:text-white transition-colors hover:underline">Eventos</a>
+              <a href="/transparencia" class="hover:text-white transition-colors hover:underline">Transparencia</a>
             </li>
           </ul>
         </div>
@@ -70,10 +70,10 @@
           <h3 class="font-bold mb-4 uppercase tracking-wider">Legal</h3>
           <ul class="space-y-2 text-gray-400">
             <li>
-              <a href="#" class="hover:text-white transition-colors hover:underline">Aviso de Privacidad</a>
+              <a href="/quejas-sugerencias" class="hover:text-white transition-colors hover:underline">Buzón de quejas y sugerencias</a>
             </li>
             <li>
-              <a href="#" class="hover:text-white transition-colors hover:underline">Términos de Uso</a>
+              <a href="/psicologia" class="hover:text-white transition-colors hover:underline">Servicio de psicología</a>
             </li>
           </ul>
         </div>
@@ -97,7 +97,7 @@
             <Icon icon="fa-brands:facebook" />
           </a>
           <a
-            href="#"
+            href="https://x.com/search?q=utnay"
             class="text-gray-400 hover:text-white transition-all transform hover:scale-110 hover:-translate-y-1 text-2xl"
           >
             <Icon icon="fa-brands:twitter" />

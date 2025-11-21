@@ -57,16 +57,17 @@ All commands are run from the repo root.
 ### Routing & Layouts
 
 - Routing follows Astro’s file-based routing under `src/pages`:
-  - `src/pages/index.astro` → `/`
-    - Landing page hero, news, and careers list.
-  - `src/pages/vinculacion.astro` → `/vinculacion`
-    - Business partnerships and employment-related content.
-  - `src/pages/scholarships.astro` → `/scholarships`
-    - Scholarships/becas information.
-  - `src/pages/carreras/[slug].astro` → `/carreras/:slug`
-    - Dynamic career detail pages generated from the careers data module.
-  - `src/pages/Login/login.astro` → `/Login/login` (case-sensitive on some hosts)
-    - Simple login form page reusing the main layout.
+-  - `src/pages/index.astro` → `/`
+-    - Landing page hero, “Noticias Recientes” slider, and “Oferta Educativa” section built from the `careers` array in `src/DB/db.js`. Each `CareerBanner` card links by `id` to a career-specific Astro page such as `/gastronomia` or `/mecatronica`.
+-  - Additional top-level pages (e.g., `admisiones.astro`, `contacto.astro`, `practicas-profesionales.astro`, `psicologia.astro`, `servicios-generales.astro`, `servicios-informaticos.astro`, `transparencia.astro`, `quejas-sugerencias.astro`) provide mostly static institutional sections but all share `MainLayout.astro` and the floating header.
+-  - `src/pages/vinculacion.astro` → `/vinculacion`
+-    - Business partnerships and employment-related content powered by the `empresas` and `vinculacion` data modules.
+-  - `src/pages/scholarships.astro` → `/scholarships`
+-    - Scholarships/becas information rendered from `becasData` via `ScholarshipBanner.vue`.
+-  - `src/pages/carreras/[slug].astro` → `/carreras/:slug`
+-    - Dynamic career detail pages generated from the same `careers` data; these URLs are available if you want to standardize career routes under `/carreras/:slug`, even though current navigation primarily links to the individual top-level career pages.
+-  - `src/pages/Login/login.astro` → `/Login/login` (case-sensitive on some hosts)
+-    - Simple login form page using the main layout, with no backend authentication wiring yet.
 
 - Shared layout:
   - `src/layouts/MainLayout.astro`
@@ -140,26 +141,25 @@ Data used to render the site is encapsulated in JS modules under `src/DB` and co
     - `vinculacion` data – similar structure to `noticias`, used by `SliderVinculacion.vue`.
 
 - MongoDB / Mongoose integration:
-  - `src/DB/conect.js`
-    - Central `connectDB()` helper wrapping `mongoose.connect` and caching the connection.
-    - Intended to be called from server-side contexts (e.g., Astro server-side code) before accessing Mongoose models.
-    - `src/pages/index.astro` currently calls `await connectDB();` at the top of the page script to initialize the connection on the server before rendering.
-  - `src/DB/sct/user.js`
-    - Defines a simple Mongoose `User` model with `name`, `email` (unique), and `password` fields.
-  - `src/scripts/main.js`
-    - Contains an async `login()` function that uses `bcrypt` and the `User` model to validate credentials.
-    - This file is imported from `MainLayout.astro`, but the login function is not yet wired to a concrete form submit or API route; treat it as experimental/incomplete backend logic.
+-  - `src/DB/conect.js`
+-    - Central `connectDB()` helper wrapping `mongoose.connect` and caching the connection.
+-    - Intended to be called from server-side contexts (e.g., Astro server-side code or API routes) before accessing Mongoose models.
+-    - `src/pages/index.astro` previously called `await connectDB();` but this is now commented out to avoid making the home page depend on a live database connection; `connectDB()` remains available for future server-side features that genuinely need MongoDB.
+-  - `src/DB/sct/user.js`
+-    - Defines a simple Mongoose `User` model with `name`, `email` (unique), and `password` fields.
+-  - `src/scripts/main.js`
+-    - Contains an async `login()` function that uses `bcrypt` and the `User` model to validate credentials.
+-    - Imported from `MainLayout.astro` so it is bundled, but the `login()` function itself is not invoked anywhere yet; there is currently no end‑to‑end login flow wired to this logic.
 
 > NOTE: The MongoDB connection string is currently hardcoded in `src/DB/conect.js`. When modifying backend code or adding new database features, prefer moving secrets into environment variables (e.g., `.env`) and referencing them via `import.meta.env` or `process.env` depending on context.
 
 ### Animations & Motion
 
 - Vue motion plugin setup: `src/plugins/v-motion.js`
-  - Installs `MotionPlugin` from `@vueuse/motion` on the Vue app when running in the browser.
-  - This is configured as the Vue `appEntrypoint` in `astro.config.mjs`, so all Vue components can use the `v-motion` directive.
-  - The plugin guards against SSR by checking `typeof window !== 'undefined'` and defers plugin installation with `setTimeout` to avoid timing issues.
-
-- Components using `v-motion`
+-  - Installs `MotionPlugin` from `@vueuse/motion` once on the Vue app via `app.use(MotionPlugin)`; there are no extra SSR guards or delayed mounting logic.
+-  - This file is configured as the Vue `appEntrypoint` in `astro.config.mjs`, so all Vue components can use the `v-motion` directive without local plugin setup.
+-
+- - Components using `v-motion`
   - `Hero.vue` and `footer.vue`, as well as other Vue components, use `v-motion` to animate entry/hover states.
   - When adding new motion, reuse this directive instead of installing motion plugins on a per-component basis.
 

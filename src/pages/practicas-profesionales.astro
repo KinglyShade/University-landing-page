@@ -1,0 +1,47 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Footer from "../components/vue/footer.vue";
+import PageHeroTemplate from "../components/vue/PageHeroTemplate.vue";
+import "../styles/global.css";
+---
+
+<MainLayout title="Prácticas Profesionales - Universidad Tecnológica de Nayarit">
+  <section id="practicas-hero" class="relative h-[80vh] md:h-[90vh]">
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <PageHeroTemplate
+      client:load
+      eyebrow="Vinculación con el sector productivo"
+      title="Prácticas profesionales UTNay"
+      subtitle="Aplica tus conocimientos en escenarios reales de trabajo y fortalece tu experiencia profesional a través de las prácticas."
+      gradientClass="bg-gradient-to-br from-slate-950 via-emerald-900 to-slate-800"
+    />
+  </section>
+
+  <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white text-gray-900">
+    <div class="max-w-6xl mx-auto grid gap-10 md:grid-cols-[1.7fr,1.3fr] items-start">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">Proceso general</h2>
+        <ol class="space-y-4 text-sm md:text-base text-gray-700 list-decimal list-inside">
+          <li>Consulta con tu coordinación de carrera el periodo en el que puedes realizar tus prácticas.</li>
+          <li>Elige, con apoyo de Vinculación, una empresa o institución registrada en la bolsa de convenios.</li>
+          <li>Entrega la documentación solicitada (carta de presentación, programa de actividades, etc.).</li>
+          <li>Cumple con las horas y actividades establecidas en tu plan de prácticas.</li>
+          <li>Entrega tus reportes y evaluaciones finales según los lineamientos de la UTNay.</li>
+        </ol>
+      </div>
+
+      <aside class="space-y-4 text-xs md:text-sm text-gray-700">
+        <div class="rounded-3xl border border-gray-100 bg-gray-50 p-5 shadow-sm">
+          <h3 class="font-semibold mb-2">Coordinación de Vinculación</h3>
+          <p>Indica aquí los datos de contacto o enlaces a formularios oficiales para registro de prácticas.</p>
+        </div>
+        <div class="rounded-3xl border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
+          <h3 class="font-semibold mb-2">Recomendación</h3>
+          <p>Invita a los estudiantes a revisar con anticipación los requisitos y tiempos para evitar retrasos en su titulación.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <Footer client:only="vue" />
+</MainLayout>

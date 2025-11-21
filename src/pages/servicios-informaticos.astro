@@ -1,0 +1,183 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Footer from "../components/vue/footer.vue";
+import PageHeroTemplate from "../components/vue/PageHeroTemplate.vue";
+import "../styles/global.css";
+---
+
+<MainLayout title="Servicios Informáticos - Universidad Tecnológica de Nayarit">
+  <section id="servicios-informaticos-hero" class="relative h-[80vh] md:h-[90vh]">
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <PageHeroTemplate
+      client:load
+      eyebrow="Soporte tecnológico"
+      title="Servicios Informáticos UTNay"
+      subtitle="Administramos plataformas académicas, red institucional y laboratorios de cómputo para respaldar las actividades de la comunidad universitaria."
+      imageSrc="https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg"
+    />
+  </section>
+
+  <section class="py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-white text-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 border-l-4 border-emerald-500 pl-4">
+        ¿Qué servicios ofrecemos?
+      </h2>
+      <p class="text-base md:text-lg text-gray-700 mb-10 max-w-3xl">
+        El <strong class="font-semibold">Departamento de Servicios Informáticos</strong> administra las plataformas tecnológicas de la UTNay: redes, sistemas académicos, correo institucional, equipos de cómputo y laboratorios especializados.
+      </p>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <article class="rounded-3xl border border-gray-100 bg-gray-50 p-6 shadow-sm">
+          <h3 class="text-lg font-semibold mb-2">Mesa de ayuda y soporte</h3>
+          <p class="text-sm text-gray-700 mb-3">
+            Atención a reportes técnicos relacionados con cuentas institucionales, acceso a plataformas, equipos de cómputo y redes dentro del campus.
+          </p>
+          <ul class="text-xs text-gray-700 space-y-1 list-disc list-inside">
+            <li>Recuperación y cambio de contraseñas.</li>
+            <li>Problemas de inicio de sesión en plataformas.</li>
+            <li>Fallas en equipos y dispositivos institucionales.</li>
+          </ul>
+        </article>
+
+        <article class="rounded-3xl border border-gray-100 bg-gray-50 p-6 shadow-sm">
+          <h3 class="text-lg font-semibold mb-2">Plataformas académicas</h3>
+          <p class="text-sm text-gray-700 mb-3">
+            Administración de las plataformas oficiales utilizadas en clases, evaluaciones, seguimiento académico y servicios escolares.
+          </p>
+          <ul class="text-xs text-gray-700 space-y-1 list-disc list-inside">
+            <li>Soporte a plataformas de gestión académica.</li>
+            <li>Orientación básica para uso de sistemas.</li>
+            <li>Difusión de manuales y guías rápidas.</li>
+          </ul>
+        </article>
+
+        <article class="rounded-3xl border border-gray-100 bg-gray-50 p-6 shadow-sm">
+          <h3 class="text-lg font-semibold mb-2">Red y conectividad</h3>
+          <p class="text-sm text-gray-700 mb-3">
+            Administración de la red interna, puntos de acceso WiFi y enlaces que conectan los distintos espacios de la universidad.
+          </p>
+          <ul class="text-xs text-gray-700 space-y-1 list-disc list-inside">
+            <li>Configuración y monitoreo de la red institucional.</li>
+            <li>Gestión de acceso a internet en laboratorios.</li>
+            <li>Atención a reportes de conexión limitada.</li>
+          </ul>
+        </article>
+
+        <article class="rounded-3xl border border-gray-100 bg-gray-50 p-6 shadow-sm">
+          <h3 class="text-lg font-semibold mb-2">Laboratorios de cómputo</h3>
+          <p class="text-sm text-gray-700 mb-3">
+            Soporte a laboratorios especializados de cómputo utilizados en prácticas académicas.
+          </p>
+          <ul class="text-xs text-gray-700 space-y-1 list-disc list-inside">
+            <li>Instalación y actualización de software académico.</li>
+            <li>Configuración de equipos para prácticas.</li>
+            <li>Resguardo básico de información institucional.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <div class="max-w-5xl mx-auto grid gap-8 md:grid-cols-[2fr,1.3fr] items-start">
+      <form
+        method="post"
+        action="/api/servicios-informaticos"
+        class="space-y-4 bg-white rounded-3xl border border-gray-100 p-6 shadow-sm"
+      >
+        <h2 class="text-xl md:text-2xl font-bold mb-2">Reporte de soporte técnico</h2>
+        <p class="text-xs md:text-sm text-gray-700 mb-4">
+          Describe tu problema para que el equipo de Servicios Informáticos pueda darle seguimiento.
+        </p>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <label class="block text-xs font-medium text-gray-600 mb-1" for="si-name">Nombre completo</label>
+            <input
+              id="si-name"
+              name="name"
+              type="text"
+              class="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-600 mb-1" for="si-email">Correo institucional</label>
+            <input
+              id="si-email"
+              name="email"
+              type="email"
+              required
+              class="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+              placeholder="usuario@utnay.edu.mx"
+            />
+          </div>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <label class="block text-xs font-medium text-gray-600 mb-1" for="si-problem">Tipo de problema</label>
+            <select
+              id="si-problem"
+              name="problemType"
+              class="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+            >
+              <option>Plataformas académicas</option>
+              <option>Correo institucional</option>
+              <option>WiFi / conexión</option>
+              <option>Equipo de cómputo</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-600 mb-1" for="si-location">Lugar</label>
+            <input
+              id="si-location"
+              name="location"
+              type="text"
+              class="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+              placeholder="Laboratorio, edificio, aula, etc."
+            />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-gray-600 mb-1" for="si-description">Descripción del incidente</label>
+          <textarea
+            id="si-description"
+            name="description"
+            rows="4"
+            required
+            class="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+            placeholder="Explica qué sucede, cómo y desde cuándo."
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-sky-500 px-5 py-2 text-xs md:text-sm font-semibold text-white shadow-md hover:shadow-lg hover:from-emerald-400 hover:to-sky-400 transition"
+        >
+          Enviar reporte
+        </button>
+      </form>
+
+      <aside class="space-y-4 text-xs md:text-sm text-gray-700">
+        <div class="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm">
+          <h3 class="font-semibold mb-2">Recomendaciones de seguridad digital</h3>
+          <ul class="list-disc list-inside space-y-1">
+            <li>No compartas tu contrase 11a institucional con nadie.</li>
+            <li>Evita acceder a plataformas oficiales desde equipos p 1bblicos sin cerrar sesi 1dn.</li>
+            <li>Reporta correos sospechosos o intentos de fraude.</li>
+          </ul>
+        </div>
+        <div class="rounded-3xl border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
+          <h3 class="font-semibold mb-2">Contacto del  19rea</h3>
+          <p>
+            Consulta los medios oficiales de contacto del departamento de Servicios Inform 19ticos (tel 19fonos, extensiones o mesas de ayuda) en la p 19gina principal de la UTNay.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <Footer client:only="vue" />
+</MainLayout>
