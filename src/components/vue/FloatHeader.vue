@@ -68,6 +68,22 @@ maldito insecto ya me tienes harto
             </ul>
           </div>
 
+          <div class="relative group">
+            <button class="hover:text-green-200 transition-colors focus:outline-none">
+              Servicios
+              <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <ul class="absolute left-0 mt-2 w-64 bg-gray-900 rounded-md shadow-lg z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+              <li><a href="/psicologia" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Psicología</a></li>
+              <li><a href="/servicios-generales" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Servicios generales</a></li>
+              <li><a href="/servicios-informaticos" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Servicios informáticos</a></li>
+              <li><a href="/transparencia" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Plataforma de transparencia</a></li>
+              <li><a href="/quejas-sugerencias" class="block px-4 py-2 hover:bg-gray-800 hover:text-green-200">Quejas y sugerencias</a></li>
+            </ul>
+          </div>
+
           <a href="/scholarships" class="hover:text-green-200 transition-colors">Becas</a>
         </div>
 
@@ -133,7 +149,16 @@ const menuItems = ref([
       { label: 'Conferencia de IA', href: '/#noticias' },
     ]
   },
-
+  {
+    label: 'Servicios',
+    subItems: [
+      { label: 'Psicología', href: '/psicologia' },
+      { label: 'Servicios generales', href: '/servicios-generales' },
+      { label: 'Servicios informáticos', href: '/servicios-informaticos' },
+      { label: 'Plataforma de transparencia', href: '/transparencia' },
+      { label: 'Quejas y sugerencias', href: '/quejas-sugerencias' },
+    ]
+  },
   {
     label: 'Vinculación',
     subItems: [
