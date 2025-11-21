@@ -1,14 +1,20 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import Footer from "../components/vue/footer.vue";
-import ContactoHero from "../components/vue/ContactoHero.vue";
+import PageHeroTemplate from "../components/vue/PageHeroTemplate.vue";
 import "../styles/global.css";
 ---
 
 <MainLayout title="Contacto - Universidad Tecnológica de Nayarit">
   <section id="contacto-hero" class="relative h-[80vh] md:h-[90vh]">
     <div class="absolute inset-0 bg-black/50 z-10"></div>
-    <ContactoHero client:load />
+    <PageHeroTemplate
+      client:load
+      eyebrow="Atención a la comunidad"
+      title="Contáctanos"
+      subtitle="Resolvemos dudas sobre admisiones, oferta educativa y servicios universitarios."
+      imageSrc="https://images.pexels.com/photos/1181395/pexels-photo-1181395.jpeg"
+    />
   </section>
 
   <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white text-gray-900">

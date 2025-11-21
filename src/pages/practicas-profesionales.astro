@@ -1,21 +1,20 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import Footer from "../components/vue/footer.vue";
+import PageHeroTemplate from "../components/vue/PageHeroTemplate.vue";
 import "../styles/global.css";
 ---
 
 <MainLayout title="Prácticas Profesionales - Universidad Tecnológica de Nayarit">
-  <section class="relative h-[80vh] md:h-[90vh] flex items-center justify-center bg-gradient-to-br from-slate-950 via-emerald-900 to-slate-800 text-white overflow-hidden">
-    <div class="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_top,_#22c55e_0,_transparent_55%),_radial-gradient(circle_at_bottom,_#0f766e_0,_transparent_55%)]"></div>
-    <div class="relative z-10 max-w-4xl px-6 text-center">
-      <p class="uppercase tracking-[0.2em] text-emerald-200 text-xs md:text-sm mb-3">Vinculación y experiencia</p>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
-        Prácticas Profesionales UTNay
-      </h1>
-      <p class="text-sm md:text-base text-emerald-50/90 max-w-2xl mx-auto">
-        Integra tu formación académica con la experiencia real en empresas y organizaciones aliadas.
-      </p>
-    </div>
+  <section id="practicas-hero" class="relative h-[80vh] md:h-[90vh]">
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <PageHeroTemplate
+      client:load
+      eyebrow="Vinculación con el sector productivo"
+      title="Prácticas profesionales UTNay"
+      subtitle="Aplica tus conocimientos en escenarios reales de trabajo y fortalece tu experiencia profesional a través de las prácticas."
+      gradientClass="bg-gradient-to-br from-slate-950 via-emerald-900 to-slate-800"
+    />
   </section>
 
   <section class="py-16 px-4 sm:px-6 lg:px-8 bg-white text-gray-900">

@@ -1,7 +1,7 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import Footer from "../components/vue/footer.vue";
-import CareerHero from "../components/vue/CareerHero.vue";
+import PageHeroTemplate from "../components/vue/PageHeroTemplate.vue";
 import { careers } from "../DB/db.js";
 import "../styles/global.css";
 
@@ -14,7 +14,7 @@ if (!career) {
 <MainLayout title={`${career.name} - Universidad Tecnológica de Nayarit`}>
   <section id="hero-turismo" class="relative h-[80vh] md:h-[90vh]">
     <div class="absolute inset-0 bg-black/50 z-10"></div>
-    <CareerHero
+    <PageHeroTemplate
       client:load
       eyebrow="Oferta educativa"
       title={career.name}
