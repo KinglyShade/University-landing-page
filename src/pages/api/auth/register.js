@@ -64,12 +64,25 @@ export const POST = async ({ request }) => {
         );
     } catch (error) {
         console.error("Error en registro:", error);
+
+        let status = 500;
+        let message = "Error interno del servidor";
+
+        if (error.name === 'ValidationError') {
+            status = 400;
+            // Concatenar todos los mensajes de error de validación
+            message = Object.values(error.errors).map(val => val.message).join(', ');
+        } else if (error.code === 11000) {
+            status = 400;
+            message = "El usuario o correo electrónico ya está registrado";
+        }
+
         return new Response(
             JSON.stringify({
-                message: "Error interno del servidor",
+                message: message,
                 error: error.message,
             }),
-            { status: 500 }
+            { status: status }
         );
     }
 };

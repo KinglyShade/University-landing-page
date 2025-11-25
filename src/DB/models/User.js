@@ -28,4 +28,10 @@ const userSchema = new mongoose.Schema({
 });
 
 // Evitar error de recompilación de modelos en desarrollo
-export default mongoose.models.User || mongoose.model('User', userSchema);
+// Si el modelo ya existe, lo eliminamos para asegurar que se use el esquema actualizado
+// Esto es útil en desarrollo cuando cambiamos el esquema
+if (mongoose.models.User) {
+    delete mongoose.models.User;
+}
+
+export default mongoose.model('User', userSchema);
