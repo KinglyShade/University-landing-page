@@ -91,18 +91,51 @@ import LayoutBase from "../../layouts/MainLayout.astro";
     const errorMsg = document.getElementById("error-msg");
 
     if (form) {
-        form.addEventListener("submit", (e) => {
+        form.addEventListener("submit", async (e) => {
             e.preventDefault();
             const formData = new FormData(e.target as HTMLFormElement);
-            const user = formData.get("username");
-            const pass = formData.get("password");
+            const username = formData.get("username");
+            const password = formData.get("password");
 
-            // Simulación de autenticación (NO SEGURO PARA PRODUCCIÓN REAL)
-            if (user === "admin" && pass === "admin123") {
-                localStorage.setItem("admin_auth", "true");
-                window.location.href = "/admin-formularios";
-            } else {
-                if (errorMsg) errorMsg.classList.remove("hidden");
+            // Reset error message
+            if (errorMsg) errorMsg.classList.add("hidden");
+
+            try {
+                const response = await fetch("/api/auth/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username,
+                        password,
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem("admin_auth", "true");
+                    // Opcional: guardar info del usuario
+                    localStorage.setItem(
+                        "user_info",
+                        JSON.stringify(data.user),
+                    );
+                    window.location.href = "/admin-formularios";
+                } else {
+                    if (errorMsg) {
+                        errorMsg.textContent =
+                            data.message || "Credenciales incorrectas.";
+                        errorMsg.classList.remove("hidden");
+                    }
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                if (errorMsg) {
+                    errorMsg.textContent =
+                        "Error de conexión. Inténtalo más tarde.";
+                    errorMsg.classList.remove("hidden");
+                }
             }
         });
     }
