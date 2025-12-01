@@ -1,0 +1,98 @@
+---
+// src/pages/university.astro
+import UniversityLayout from "../layouts/UniversityLayout.astro";
+---
+
+<UniversityLayout title="Universidad Ejemplo - Inicio">
+    <h1>Bienvenido a la Universidad Ejemplo</h1>
+
+    <article>
+        <h2>Nuestra Institución</h2>
+        <p>
+            Somos una institución comprometida con la excelencia académica y la
+            formación integral de nuestros estudiantes. Con más de 50 años de
+            experiencia, ofrecemos programas educativos de calidad que se
+            adaptan a las necesidades del mundo actual.
+        </p>
+
+        <h3>Misión</h3>
+        <p>
+            Formar profesionales competentes, éticos y comprometidos con el
+            desarrollo de la sociedad, a través de programas educativos de
+            calidad y una formación integral.
+        </p>
+
+        <h3>Visión</h3>
+        <p>
+            Ser reconocidos como una de las mejores instituciones educativas del
+            país, destacando por nuestra excelencia académica, investigación de
+            vanguardia y compromiso social.
+        </p>
+    </article>
+
+    <section>
+        <h2>Noticias Recientes</h2>
+        <div class="news-grid">
+            <div class="news-card">
+                <h3>Inicio del Semestre</h3>
+                <p>
+                    El próximo lunes inicia el semestre de primavera 2025.
+                    ¡Bienvenidos estudiantes!
+                </p>
+            </div>
+            <div class="news-card">
+                <h3>Convocatoria de Becas</h3>
+                <p>
+                    Abierta la convocatoria para solicitar becas académicas.
+                    Fecha límite: 15 de diciembre.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        h1 {
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            color: var(--secondary-blue);
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--primary-blue);
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.8rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .news-card {
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-blue);
+        }
+
+        .news-card h3 {
+            margin-top: 0;
+            color: var(--secondary-blue);
+        }
+    </style>
+</UniversityLayout>
