@@ -33,6 +33,36 @@ import LayoutBase from "../../layouts/MainLayout.astro";
                         />
                     </div>
                     <div>
+                        <label for="firstName" class="sr-only">Nombre</label>
+                        <input
+                            id="firstName"
+                            name="firstName"
+                            type="text"
+                            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                            placeholder="Nombre (opcional)"
+                        />
+                    </div>
+                    <div>
+                        <label for="lastName" class="sr-only">Apellido</label>
+                        <input
+                            id="lastName"
+                            name="lastName"
+                            type="text"
+                            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                            placeholder="Apellido (opcional)"
+                        />
+                    </div>
+                    <div>
+                        <label for="matricula" class="sr-only">Matrícula</label>
+                        <input
+                            id="matricula"
+                            name="matricula"
+                            type="text"
+                            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                            placeholder="Matrícula (opcional)"
+                        />
+                    </div>
+                    <div>
                         <label for="email" class="sr-only"
                             >Correo Electrónico</label
                         >
@@ -41,8 +71,28 @@ import LayoutBase from "../../layouts/MainLayout.astro";
                             name="email"
                             type="email"
                             required
-                            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
                             placeholder="Correo Electrónico"
+                        />
+                    </div>
+                    <div>
+                        <label for="phone" class="sr-only">Teléfono</label>
+                        <input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                            placeholder="Teléfono (opcional)"
+                        />
+                    </div>
+                    <div>
+                        <label for="profile_picture" class="sr-only">URL foto de perfil</label>
+                        <input
+                            id="profile_picture"
+                            name="profile_picture"
+                            type="url"
+                            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                            placeholder="URL de foto de perfil (opcional)"
                         />
                     </div>
                     <div>
@@ -52,7 +102,7 @@ import LayoutBase from "../../layouts/MainLayout.astro";
                             name="password"
                             type="password"
                             required
-                            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
                             placeholder="Contraseña"
                         />
                     </div>
@@ -111,7 +161,12 @@ import LayoutBase from "../../layouts/MainLayout.astro";
             e.preventDefault();
             const formData = new FormData(e.target as HTMLFormElement);
             const username = formData.get("username");
+            const firstName = formData.get("firstName");
+            const lastName = formData.get("lastName");
+            const matricula = formData.get("matricula");
             const email = formData.get("email");
+            const phone = formData.get("phone");
+            const profile_picture = formData.get("profile_picture");
             const password = formData.get("password");
             const confirmPassword = formData.get("confirm-password");
 
@@ -135,7 +190,12 @@ import LayoutBase from "../../layouts/MainLayout.astro";
                     },
                     body: JSON.stringify({
                         username,
+                        firstName,
+                        lastName,
+                        matricula,
                         email,
+                        phone,
+                        profile_picture,
                         password,
                         confirmPassword,
                     }),

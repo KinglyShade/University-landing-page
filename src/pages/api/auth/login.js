@@ -49,6 +49,11 @@ export const POST = async ({ request }) => {
                     id: user._id,
                     username: user.username,
                     email: user.email,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                    matricula: user.matricula,
+                    phone: user.phone,
+                    profile_picture: user.profile_picture,
                 },
             }),
             { status: 200 }

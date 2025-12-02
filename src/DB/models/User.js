@@ -8,6 +8,21 @@ const userSchema = new mongoose.Schema({
         trim: true,
         minlength: [3, 'El nombre de usuario debe tener al menos 3 caracteres']
     },
+    firstName: {
+        type: String,
+        trim: true,
+        default: ''
+    },
+    lastName: {
+        type: String,
+        trim: true,
+        default: ''
+    },
+    matricula: {
+        type: String,
+        trim: true,
+        default: ''
+    },
     email: {
         type: String,
         required: [true, 'El correo electrónico es requerido'],
@@ -15,6 +30,16 @@ const userSchema = new mongoose.Schema({
         trim: true,
         lowercase: true,
         match: [/^\S+@\S+\.\S+$/, 'Por favor ingresa un correo electrónico válido']
+    },
+    phone: {
+        type: String,
+        trim: true,
+        default: ''
+    },
+    profile_picture: {
+        type: String,
+        trim: true,
+        default: 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
     },
     password: {
         type: String,

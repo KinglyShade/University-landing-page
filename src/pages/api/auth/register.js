@@ -8,7 +8,17 @@ export const POST = async ({ request }) => {
         await connectDB();
 
         const data = await request.json();
-        const { username, email, password, confirmPassword } = data;
+        const {
+            username,
+            email,
+            password,
+            confirmPassword,
+            firstName,
+            lastName,
+            matricula,
+            phone,
+            profile_picture,
+        } = data;
 
         // Validaciones básicas
         if (!username || !email || !password || !confirmPassword) {
@@ -47,6 +57,12 @@ export const POST = async ({ request }) => {
             username,
             email,
             password, // TODO: Hash password
+            firstName: firstName || '',
+            lastName: lastName || '',
+            matricula: matricula || '',
+            phone: phone || '',
+            profile_picture:
+                profile_picture || 'https://cdn-icons-png.flaticon.com/512/149/149071.png',
         });
 
         await newUser.save();
@@ -58,6 +74,11 @@ export const POST = async ({ request }) => {
                     id: newUser._id,
                     username: newUser.username,
                     email: newUser.email,
+                    firstName: newUser.firstName,
+                    lastName: newUser.lastName,
+                    matricula: newUser.matricula,
+                    phone: newUser.phone,
+                    profile_picture: newUser.profile_picture,
                 },
             }),
             { status: 201 }
