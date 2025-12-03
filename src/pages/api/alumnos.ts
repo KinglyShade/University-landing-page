@@ -1,174 +1,141 @@
 // @ts-nocheck
-import { getCollection } from 'astro:content';
-import dbConnect from '../../lib/dbConnect';
-import Alumno from '../../models/Alumno';
+export const prerender = false; // Renderizado en servidor (SSR) obligatorio para APIs
 
-export async function GET() {
+// ---------------------------------------------------------
+// 1. IMPORTACIONES CORREGIDAS (Rutas relativas exactas)
+// ---------------------------------------------------------
+import { connectDB } from "../../DB/conect"; // Sube 2 niveles -> entra a DB -> archivo conect
+import Alumno from "../../models/Alumno";    // Sube 2 niveles -> entra a models -> archivo Alumno
+
+// ---------------------------------------------------------
+// 2. ENDPOINTS (GET, POST, DELETE)
+// ---------------------------------------------------------
+
+export const GET = async () => {
     try {
-        await dbConnect();
+        console.log("--> API: Iniciando GET /alumnos");
+
+        // Conexión
+        await connectDB();
+        console.log("--> API: Conectado a Mongo. Buscando alumnos...");
+
+        // Consulta (Ordenados por fecha de creación descendente)
         const alumnos = await Alumno.find({}).sort({ createdAt: -1 });
-        return new Response(
-            JSON.stringify({ success: true, data: alumnos }),
-            {
-                status: 200,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-        );
-    } catch (error) {
-        return new Response(
-            JSON.stringify({ success: false, error: 'Error al obtener los alumnos' }),
-            {
-                status: 500,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-        );
-    }
-}
 
-export async function POST({ request }) {
+        return new Response(JSON.stringify({
+            success: true,
+            data: alumnos
+        }), {
+            status: 200,
+            headers: { "Content-Type": "application/json" }
+        });
+
+    } catch (error) {
+        console.error("--> API ERROR en GET:", error);
+        return new Response(JSON.stringify({
+            success: false,
+            error: 'Error al obtener los alumnos',
+            details: error instanceof Error ? error.message : String(error)
+        }), {
+            status: 500,
+            headers: { "Content-Type": "application/json" }
+        });
+    }
+};
+
+export const POST = async ({ request }) => {
     try {
-        await dbConnect();
+        await connectDB();
         const data = await request.json();
 
-        // Validación básica
+        // Validación básica de campos requeridos por tu Schema
         if (!data.nombre || !data.matricula || data.calificacion === undefined) {
-            return new Response(
-                JSON.stringify({ success: false, error: 'Faltan campos requeridos' }),
-                {
-                    status: 400,
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
+            return new Response(JSON.stringify({
+                success: false,
+                error: 'Faltan campos requeridos (nombre, matricula, calificacion)'
+            }), {
+                status: 400,
+                headers: { "Content-Type": "application/json" }
+            });
         }
 
         const alumno = await Alumno.create(data);
-        return new Response(
-            JSON.stringify({ success: true, data: alumno }),
-            {
-                status: 201,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-        );
-    } catch (error) {
-        if (error.code === 11000) { // Duplicate key error
-            return new Response(
-                JSON.stringify({ success: false, error: 'Ya existe un alumno con esta matrícula' }),
-                {
-                    status: 400,
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
-        }
-        return new Response(
-            JSON.stringify({ success: false, error: 'Error al crear el alumno' }),
-            {
-                status: 500,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-        );
-    }
-}
 
-export async function DELETE({ request }) {
+        return new Response(JSON.stringify({
+            success: true,
+            data: alumno
+        }), {
+            status: 201,
+            headers: { "Content-Type": "application/json" }
+        });
+
+    } catch (error) {
+        console.error("--> API ERROR en POST:", error);
+
+        // Manejo de error de llave duplicada (Matrícula única)
+        if (error.code === 11000) {
+            return new Response(JSON.stringify({
+                success: false,
+                error: 'Ya existe un alumno con esta matrícula'
+            }), {
+                status: 400,
+                headers: { "Content-Type": "application/json" }
+            });
+        }
+
+        return new Response(JSON.stringify({
+            success: false,
+            error: 'Error al crear el alumno'
+        }), {
+            status: 500,
+            headers: { "Content-Type": "application/json" }
+        });
+    }
+};
+
+export const DELETE = async ({ request }) => {
     try {
-        await dbConnect();
+        await connectDB();
         const { id } = await request.json();
 
         if (!id) {
-            return new Response(
-                JSON.stringify({ success: false, error: 'Se requiere el ID del alumno' }),
-                {
-                    status: 400,
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
+            return new Response(JSON.stringify({
+                success: false,
+                error: 'Se requiere el ID del alumno'
+            }), {
+                status: 400,
+                headers: { "Content-Type": "application/json" }
+            });
         }
 
         const alumno = await Alumno.findByIdAndDelete(id);
 
         if (!alumno) {
-            return new Response(
-                JSON.stringify({ success: false, error: 'Alumno no encontrado' }),
-                {
-                    status: 404,
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
+            return new Response(JSON.stringify({
+                success: false,
+                error: 'Alumno no encontrado'
+            }), {
+                status: 404,
+                headers: { "Content-Type": "application/json" }
+            });
         }
 
-        return new Response(
-            JSON.stringify({ success: true, data: {} }),
-            {
-                status: 200,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-        );
+        return new Response(JSON.stringify({
+            success: true,
+            data: {}
+        }), {
+            status: 200,
+            headers: { "Content-Type": "application/json" }
+        });
+
     } catch (error) {
-        return new Response(
-            JSON.stringify({ success: false, error: 'Error al eliminar el alumno' }),
-            {
-                status: 500,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-        );
+        console.error("--> API ERROR en DELETE:", error);
+        return new Response(JSON.stringify({
+            success: false,
+            error: 'Error al eliminar el alumno'
+        }), {
+            status: 500,
+            headers: { "Content-Type": "application/json" }
+        });
     }
-}
-
-// Handle all methods
-const ALLOWED_METHODS = ['GET', 'POST', 'DELETE'];
-
-export async function ALL({ request }) {
-    const method = request.method;
-
-    if (!ALLOWED_METHODS.includes(method)) {
-        return new Response(
-            JSON.stringify({ success: false, error: 'Método no permitido' }),
-            {
-                status: 405,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Allow': ALLOWED_METHODS.join(', '),
-                },
-            }
-        );
-    }
-
-    switch (method) {
-        case 'GET':
-            return GET({ request });
-        case 'POST':
-            return POST({ request });
-        case 'DELETE':
-            return DELETE({ request });
-        default:
-            return new Response(
-                JSON.stringify({ success: false, error: 'Método no implementado' }),
-                {
-                    status: 501,
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
-    }
-}
+};
