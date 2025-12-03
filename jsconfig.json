@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ]
+        },
+        "jsx": "preserve",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true,
+        "checkJs": false,
+        "target": "ESNext",
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext"
+        ],
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "noEmit": true
+    },
+    "include": [
+        "src/**/*.d.ts",
+        "src/**/*.js",
+        "src/**/*.jsx",
+        "src/**/*.vue",
+        "src/**/*.astro"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
