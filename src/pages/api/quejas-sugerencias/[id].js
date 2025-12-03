@@ -1,5 +1,5 @@
 import connectDB from '../../../DB/conect.js';
-import QuejaSugerencia from '../../../DB/sct/quejaSugerencia.js';
+import QuejaSugerencia from '../../../DB/models/QuejaSugerencia.js';
 
 async function parseBody(request) {
   const contentType = request.headers.get('content-type') || '';

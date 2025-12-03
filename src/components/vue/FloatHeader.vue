@@ -20,7 +20,7 @@ maldito insecto ya me tienes harto
         </div>
 
         <!-- Links de escritorio con dropdowns -->
-        <div class="hidden md:flex space-x-8">
+        <div class="hidden md:flex space-x-8 text-white">
           <div class="relative group">
             <a href="/#carreras" class="hover:text-green-200 transition-colors focus:outline-none">
               Carreras
@@ -69,7 +69,6 @@ maldito insecto ya me tienes harto
           </div>
 
           <a href="/scholarships" class="hover:text-green-200 transition-colors">Becas</a>
-          <a href="/scholarships" class="hover:text-green-200 transition-colors">Becas</a>
           
           <!-- User Profile / Register -->
           <div v-if="isLoggedIn" class="relative group">
@@ -92,7 +91,7 @@ maldito insecto ya me tienes harto
               </li>
             </ul>
           </div>
-          <a v-else href="/Auth/register" class="hover:text-green-200 transition-colors font-semibold border border-green-200 px-4 py-1 rounded-full hover:bg-green-200 hover:text-green-900">Registro</a>
+          <a v-else href="/Auth/register" class="hover:text-green-900 transition-colors font-semibold border border-green-200 px-4 py-1 rounded-full hover:bg-green-200">Registro</a>
         </div>
 
         <!-- Botón hamburguesa móvil -->
@@ -264,6 +263,18 @@ header.scrolled nav {
   border-radius: 24px;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
     0 2px 4px -2px rgb(0 0 0 / 0.1);
+  color: white;
+}
+
+/* Make navigation links white when scrolled */
+header.scrolled nav a,
+header.scrolled nav button {
+  color: white;
+}
+
+header.scrolled nav a:hover,
+header.scrolled nav button:hover {
+  color: rgb(167 243 208); /* green-200 */
 }
 
 /* Animaciones para dropdowns de escritorio */

@@ -6,14 +6,8 @@
       :speed="1000"
       :slides-per-view="1"
       :space-between="0"
-      :autoplay="{
-        delay: 8000,
-        disableOnInteraction: false,
-      }"
-      :navigation="{
-        prevEl: '.prev-button',
-        nextEl: '.next-button',
-      }"
+      :autoplay="autoplayConfig"
+      :navigation="navigationConfig"
       class="w-full h-full"
     >
       <swiper-slide v-for="noticia in noticiasRef" :key="noticia.titulo">
@@ -36,7 +30,6 @@
       </swiper-slide>
     </swiper>
 
-    <!-- Botones -->
     <button class="prev-button absolute top-1/2 -translate-y-1/2 left-4 md:left-8 z-20 p-2 bg-white/70 rounded-full shadow-lg backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white/90 focus:outline-none">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="gray-900" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -57,9 +50,21 @@ import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import { noticias } from '../../DB/noticias.js'; 
+import { noticias } from '../../data/noticias.js';
+
 const modules = [Autoplay, Navigation];
 const noticiasRef = ref(noticias);
+
+// FIX: Configuration moved here and cast as 'any' to satisfy TypeScript
+const autoplayConfig = {
+  delay: 8000,
+  disableOnInteraction: false,
+} as any;
+
+const navigationConfig = {
+  prevEl: '.prev-button',
+  nextEl: '.next-button',
+} as any;
 </script>
 
 <style scoped>

@@ -6,7 +6,7 @@ import CareerBanner from "../components/vue/CareerBanner.vue";
 import NoticiasSlider from "../components/vue/noticiasslider.vue";
 import Footer from "../components/vue/footer.vue";
 import type { ImageMetadata } from "astro";
-import { careers } from "../DB/db.js";
+import { careers } from "../data/careers.js";
 // import connectDB from "../DB/conect.js";
 
 import "../styles/global.css";
@@ -39,32 +39,32 @@ interface Career {
             <NoticiasSlider client:load />
         </div>
     </div>
-        <section id="carreras" class="my-20 mx-auto">
-            <div class="text-center bg-gray-100 py-20 px-4">
-                <h2 class="text-4xl font-bold text-gray-800 mb-2">
-                    Oferta Educativa
-                </h2>
-                <p class="text-gray-600">
-                    Explora las carreras que te llevarán al siguiente nivel.
-                </p>
-            </div>
+    <section id="carreras" class="my-20 mx-auto">
+        <div class="text-center bg-gray-100 py-20 px-4">
+            <h2 class="text-4xl font-bold text-gray-800 mb-2">
+                Oferta Educativa
+            </h2>
+            <p class="text-gray-600">
+                Explora las carreras que te llevarán al siguiente nivel.
+            </p>
+        </div>
 
-            <div class="flex flex-col">
-                {
-                    careers.map((career) => (
-                        <CareerBanner
-                            title={career.name}
-                            imageUrl={career.img}
-                            description={career.description}
-                            backgroundImage={career.background}
-                            href={`/${career.id}`}
-                            client:visible
-                        />
-                    ))
-                }
-            </div>
-        </section>
-    </div>
-    <Footer client:only="vue" />
+        <div class="flex flex-col">
+            {
+                careers.map((career) => (
+                    <CareerBanner
+                        title={career.name}
+                        imageUrl={career.img}
+                        description={career.description}
+                        backgroundImage={career.background}
+                        href={`/${career.id}`}
+                        client:visible
+                    />
+                ))
+            }
+        </div>
+    </section>
 </MainLayout>
+<Footer client:only="vue" />
+
 <!-- <script src="../scripts/main.js"></script> -->

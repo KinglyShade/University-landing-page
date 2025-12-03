@@ -1,5 +1,5 @@
 import connectDB from '../../DB/conect.js';
-import ServicioInformatica from '../../DB/sct/servicioInformatica.js';
+import ServicioInformatica from '../../DB/models/ServicioInformatica.js';
 
 async function parseBody(request) {
   const contentType = request.headers.get('content-type') || '';

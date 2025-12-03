@@ -2,7 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Footer from "../components/vue/footer.vue";
 import PageHeroTemplate from "../components/vue/PageHeroTemplate.vue";
-import { careers } from "../DB/db.js";
+import { careers } from "../data/careers.js";
 import "../styles/global.css";
 
 const career = careers.find((c) => c.id === "administracion");
@@ -27,13 +27,15 @@ if (!career) {
     <div class="max-w-5xl mx-auto space-y-6 text-sm md:text-base text-gray-700">
       <h2 class="text-2xl md:text-3xl font-bold mb-2">Perfil de la carrera</h2>
       <p>
-        Duración: <span class="font-semibold">{career.duration}</span> · Modalidad: <span class="font-semibold">{career.modality}</span>
+        Duración: <span class="font-semibold">{career.duration}</span> · Modalidad:
+        <span class="font-semibold">{career.modality}</span>
       </p>
       <p>
         Campo laboral: {career.field}
       </p>
       <p>
-        Añade aquí información de administración de empresas, finanzas, recursos humanos y proyectos que se desarrollan en la carrera.
+        Añade aquí información de administración de empresas, finanzas, recursos
+        humanos y proyectos que se desarrollan en la carrera.
       </p>
     </div>
   </section>

@@ -1,5 +1,5 @@
 import connectDB from '../../DB/conect.js';
-import ContactMessage from '../../DB/sct/contact.js';
+import ContactMessage from '../../DB/models/Contact.js';
 
 async function parseBody(request) {
   const contentType = request.headers.get('content-type') || '';

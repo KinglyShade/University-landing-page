@@ -6,14 +6,8 @@
       :speed="1000"
       :slides-per-view="1"
       :space-between="0"
-      :autoplay="{
-        delay: 8000,
-        disableOnInteraction: false,
-      }"
-      :navigation="{
-        prevEl: '.prev-button',
-        nextEl: '.next-button',
-      }"
+      :autoplay="autoplayConfig"
+      :navigation="navigationConfig"
       class="w-full h-full"
     >
       <swiper-slide v-for="vinculacion in vinculacionRef" :key="vinculacion.titulo">
@@ -57,20 +51,25 @@ import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-// IMPORT CORREGIDO: usar el nombre ASCII sin acento para evitar problemas
-// Asegúrate de que en ../../DB/vinculacion.js el export sea exactamente `vinculacion`
-// (sin tilde). Si tu archivo exporta con otro nombre, ajusta aquí exactamente.
-import { vinculación } from '../../DB/vinculacion.js';
+import { vinculación } from '../../data/vinculacion.js';
 
 const modules = [Autoplay, Navigation];
-
-// Guardamos la lista en un ref para iterar en template
 const vinculacionRef = ref(vinculación || []);
 
-// DEBUG: comprobar en consola si la data llega
+// FIX: Add 'as any' here
+const autoplayConfig = {
+  delay: 8000,
+  disableOnInteraction: false,
+} as any;
+
+// FIX: Add 'as any' here
+const navigationConfig = {
+  prevEl: '.prev-button',
+  nextEl: '.next-button',
+} as any;
+
 onMounted(() => {
   console.log('[VinculacionHero] vinculacionRef length:', Array.isArray(vinculacionRef.value) ? vinculacionRef.value.length : typeof vinculacionRef.value, vinculacionRef.value);
-  // comprobación DOM de Swiper después de render
   setTimeout(() => {
     const s = document.querySelector('.swiper');
     const slides = document.querySelectorAll('.swiper-slide');
@@ -94,13 +93,11 @@ onMounted(() => {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Inicialmente ocultas: se muestran solo si Swiper aplica .swiper-slide-active */
 .image-clipped-container, .slide-title, .slide-text, .slide-link {
   opacity: 0;
   transform: translateX(0);
 }
 
-/* Cuando Swiper añade la clase .swiper-slide-active, animamos */
 .swiper-slide-active .image-clipped-container {
   opacity: 1;
   animation: slideInLeft 1s ease-out forwards;
