@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = 'mongodb+srv://kinglyshade_db_user:LzWyfJZOksGHKMPj@ulp.bnzc439.mongodb.net/?appName=ulp';
+// Lee la URI de conexión desde variables de entorno
+// Asegúrate de definir MONGODB_URI en tu entorno (.env o configuración de despliegue)
+const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
-    console.error('Error: MONGODB_URI no está definido. Por favor define MONGODB_URI en el archivo .env');
+    console.error('Error: MONGODB_URI no está definido. Por favor define MONGODB_URI en las variables de entorno');
 }
 
 // Variable para tracking de la promesa de conexión
