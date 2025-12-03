@@ -1,8 +1,5 @@
 ---
 import LayoutBase from "../layouts/MainLayout.astro";
-import connectDB from "../DB/conect";
-import Grade from "../DB/models/Grade";
-import User from "../DB/models/User";
 
 // Proteger la ruta en el servidor (opcional, ya que también validamos en cliente)
 // Nota: Astro estático no tiene sesión persistente en servidor sin adaptadores,
@@ -11,70 +8,265 @@ import User from "../DB/models/User";
 ---
 
 <LayoutBase title="Mi Perfil - UTNay">
-    <div class="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 pt-24">
-        <div class="max-w-4xl mx-auto">
-            <!-- Perfil Header -->
-            <div class="bg-white shadow rounded-lg overflow-hidden mb-6">
-                <div class="bg-emerald-600 h-32"></div>
-                <div class="px-4 py-5 sm:px-6 relative">
+    <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 pt-24">
+        <div class="max-w-5xl mx-auto space-y-8">
+            <!-- Perfil Card -->
+            <div
+                class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all hover:shadow-2xl"
+            >
+                <div
+                    class="h-40 bg-gradient-to-r from-emerald-600 to-teal-500 relative"
+                >
+                    <div class="absolute inset-0 bg-black opacity-10"></div>
+                </div>
+
+                <div class="px-8 pb-8 relative">
                     <div
-                        class="-mt-16 mb-4 flex justify-center sm:justify-start"
+                        class="flex flex-col sm:flex-row items-center sm:items-end -mt-16 mb-6"
                     >
-                        <img
-                            id="profile-image"
-                            src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                            alt="Profile"
-                            class="h-32 w-32 rounded-full border-4 border-white bg-white object-cover shadow-lg"
-                        />
+                        <div class="relative">
+                            <img
+                                id="profile-image"
+                                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                                alt="Profile"
+                                class="h-32 w-32 rounded-full border-4 border-white bg-white object-cover shadow-lg"
+                            />
+                            <button
+                                id="edit-avatar-btn"
+                                class="absolute bottom-0 right-0 bg-emerald-500 text-white p-2 rounded-full shadow-md hover:bg-emerald-600 transition-colors"
+                                title="Cambiar foto"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-4"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                                    ></path>
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                                    ></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div
+                            class="mt-4 sm:mt-0 sm:ml-6 text-center sm:text-left flex-1"
+                        >
+                            <h3
+                                class="text-3xl font-bold text-gray-900"
+                                id="profile-username"
+                            >
+                                Cargando...
+                            </h3>
+                            <p
+                                class="text-emerald-600 font-medium"
+                                id="profile-matricula"
+                            >
+                                ...
+                            </p>
+                        </div>
+
+                        <div class="mt-4 sm:mt-0 flex space-x-3">
+                            <button
+                                id="edit-profile-btn"
+                                class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="-ml-1 mr-2 h-5 w-5 text-gray-500"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                    ></path>
+                                </svg>
+                                Editar Perfil
+                            </button>
+                            <button
+                                id="delete-account-btn"
+                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all shadow-md"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="-ml-1 mr-2 h-5 w-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                    ></path>
+                                </svg>
+                                Eliminar Cuenta
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="text-center sm:text-left">
-                        <h3
-                            class="text-2xl leading-6 font-bold text-gray-900"
-                            id="profile-username"
-                        >
-                            Cargando...
-                        </h3>
-                        <p
-                            class="mt-1 max-w-2xl text-sm text-gray-500"
-                            id="profile-email"
-                        >
-                            ...
-                        </p>
-                    </div>
-                </div>
-                <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
-                    <dl class="sm:divide-y sm:divide-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                         <div
-                            class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                            class="bg-gray-50 p-4 rounded-lg border border-gray-200"
                         >
-                            <dt class="text-sm font-medium text-gray-500">
-                                Teléfono
-                            </dt>
-                            <dd
-                                class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                                id="profile-phone"
+                            <h4
+                                class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2"
                             >
-                                -
-                            </dd>
+                                Información de Contacto
+                            </h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5 text-gray-400 mr-3"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                        ></path>
+                                    </svg>
+                                    <span
+                                        class="text-gray-900"
+                                        id="profile-email">...</span
+                                    >
+                                </div>
+                                <div class="flex items-center">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5 text-gray-400 mr-3"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                        ></path>
+                                    </svg>
+                                    <span
+                                        class="text-gray-900"
+                                        id="profile-phone">-</span
+                                    >
+                                </div>
+                            </div>
                         </div>
-                        <!-- Más detalles si fuera necesario -->
-                    </dl>
+
+                        <div
+                            class="bg-gray-50 p-4 rounded-lg border border-gray-200"
+                        >
+                            <h4
+                                class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2"
+                            >
+                                Información Académica
+                            </h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5 text-gray-400 mr-3"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 14l9-5-9-5-9 5 9 5z"></path>
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                                        ></path>
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                                        ></path>
+                                    </svg>
+                                    <span
+                                        class="text-gray-900 font-medium"
+                                        id="profile-career"
+                                        >Ingeniería en Desarrollo de Software</span
+                                    >
+                                </div>
+                                <div class="flex items-center">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5 text-gray-400 mr-3"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
+                                        ></path>
+                                    </svg>
+                                    <span
+                                        class="text-gray-900"
+                                        id="profile-matricula-detail">-</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Tablón de Calificaciones -->
-            <div class="bg-white shadow rounded-lg overflow-hidden">
+            <!-- Kardex -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
                 <div
-                    class="px-4 py-5 sm:px-6 border-b border-gray-200 flex justify-between items-center"
+                    class="px-6 py-5 border-b border-gray-200 flex justify-between items-center bg-gray-50"
                 >
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    <h3
+                        class="text-lg leading-6 font-bold text-gray-900 flex items-center"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 text-emerald-600 mr-2"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                            ></path>
+                        </svg>
                         Kardex de Calificaciones
                     </h3>
-                    <!-- Botón para demo: Añadir calificación (solo visible si admin o para probar) -->
                     <button
                         id="add-grade-btn"
-                        class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded hover:bg-emerald-200 transition-colors"
+                        class="text-xs bg-emerald-100 text-emerald-700 px-3 py-1.5 rounded-full hover:bg-emerald-200 transition-colors font-medium"
                     >
                         + Simular Calificación
                     </button>
@@ -86,41 +278,35 @@ import User from "../DB/models/User";
                                 <th
                                     scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                    >Materia</th
                                 >
-                                    Materia
-                                </th>
                                 <th
                                     scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                    >Cuatrimestre</th
                                 >
-                                    Cuatrimestre
-                                </th>
                                 <th
                                     scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                    >Calificación</th
                                 >
-                                    Calificación
-                                </th>
                                 <th
                                     scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                    >Estado</th
                                 >
-                                    Estado
-                                </th>
                             </tr>
                         </thead>
                         <tbody
                             class="bg-white divide-y divide-gray-200"
                             id="grades-body"
                         >
-                            <!-- Las calificaciones se cargarán aquí -->
                             <tr>
                                 <td
                                     colspan="4"
                                     class="px-6 py-4 text-center text-sm text-gray-500"
+                                    >Cargando calificaciones...</td
                                 >
-                                    Cargando calificaciones...
-                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -128,10 +314,132 @@ import User from "../DB/models/User";
             </div>
         </div>
     </div>
+
+    <!-- Edit Profile Modal -->
+    <div
+        id="edit-modal"
+        class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50 flex items-center justify-center"
+    >
+        <div
+            class="relative mx-auto p-5 border w-full max-w-md shadow-lg rounded-xl bg-white"
+        >
+            <div class="mt-3">
+                <h3
+                    class="text-lg leading-6 font-medium text-gray-900 text-center mb-4"
+                >
+                    Editar Perfil
+                </h3>
+                <form id="edit-form" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700"
+                            >Nombre de Usuario</label
+                        >
+                        <input
+                            type="text"
+                            name="username"
+                            id="edit-username"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+                        />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700"
+                            >Carrera</label
+                        >
+                        <select
+                            name="career"
+                            id="edit-career"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+                        >
+                            <option value="" disabled
+                                >Selecciona tu Carrera</option
+                            >
+                            <option value="Ingeniería en Desarrollo de Software"
+                                >Ingeniería en Desarrollo de Software</option
+                            >
+                            <option value="Ingeniería en Mecatrónica"
+                                >Ingeniería en Mecatrónica</option
+                            >
+                            <option value="Ingeniería en Gestión de Proyectos"
+                                >Ingeniería en Gestión de Proyectos</option
+                            >
+                            <option value="Licenciatura en Gastronomía"
+                                >Licenciatura en Gastronomía</option
+                            >
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700"
+                            >Matrícula</label
+                        >
+                        <input
+                            type="text"
+                            name="matricula"
+                            id="edit-matricula"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+                        />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700"
+                            >Correo Electrónico</label
+                        >
+                        <input
+                            type="email"
+                            name="email"
+                            id="edit-email"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+                        />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700"
+                            >Teléfono</label
+                        >
+                        <input
+                            type="tel"
+                            name="phone"
+                            id="edit-phone"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+                        />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700"
+                            >URL Foto de Perfil</label
+                        >
+                        <input
+                            type="url"
+                            name="profile_picture"
+                            id="edit-profile-picture"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
+                        />
+                    </div>
+
+                    <div
+                        id="edit-error"
+                        class="text-red-500 text-sm text-center hidden"
+                    >
+                    </div>
+
+                    <div class="flex justify-end space-x-3 mt-5">
+                        <button
+                            type="button"
+                            id="cancel-edit"
+                            class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+                        >
+                            Cancelar
+                        </button>
+                        <button
+                            type="submit"
+                            class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+                        >
+                            Guardar Cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </LayoutBase>
 
 <script>
-    // Lógica del cliente para cargar datos
     document.addEventListener("DOMContentLoaded", async () => {
         const userStr = localStorage.getItem("user_info");
         const auth = localStorage.getItem("admin_auth");
@@ -141,138 +449,252 @@ import User from "../DB/models/User";
             return;
         }
 
-        const user = JSON.parse(userStr);
-
-        // Llenar datos del perfil
-        const usernameEl = document.getElementById("profile-username");
-        const emailEl = document.getElementById("profile-email");
-        const phoneEl = document.getElementById("profile-phone");
-        const imgEl = document.getElementById(
-            "profile-image",
-        ) as HTMLImageElement;
-
-        if (usernameEl) usernameEl.textContent = user.username;
-        if (emailEl) emailEl.textContent = user.email;
-        if (phoneEl) phoneEl.textContent = user.phone || "No registrado";
-        if (imgEl && user.profile_picture) imgEl.src = user.profile_picture;
-
-        // Cargar calificaciones (Simuladas o desde API)
-        // Como no creamos un endpoint de "get grades", lo simularemos o crearemos uno rápido si es necesario.
-        // Para este paso, haré que el botón añada una fila localmente y guarde en localStorage para persistencia básica de demo
-        // O idealmente, fetch a un endpoint.
-
+        let user = JSON.parse(userStr);
+        renderProfile(user);
         loadGrades(user.id);
 
-        const addBtn = document.getElementById("add-grade-btn");
-        if (addBtn) {
-            addBtn.addEventListener("click", () => {
-                addRandomGrade(user.id);
+        // Event Listeners
+        const editBtn = document.getElementById("edit-profile-btn");
+        const editAvatarBtn = document.getElementById("edit-avatar-btn");
+        const deleteBtn = document.getElementById("delete-account-btn");
+        const modal = document.getElementById("edit-modal");
+        const cancelBtn = document.getElementById("cancel-edit");
+        const editForm = document.getElementById("edit-form");
+        const addGradeBtn = document.getElementById("add-grade-btn");
+
+        if (editBtn) editBtn.addEventListener("click", openEditModal);
+        if (editAvatarBtn)
+            editAvatarBtn.addEventListener("click", openEditModal);
+        if (cancelBtn) cancelBtn.addEventListener("click", closeEditModal);
+        if (editForm) editForm.addEventListener("submit", handleEditSubmit);
+        if (deleteBtn) deleteBtn.addEventListener("click", handleDeleteAccount);
+        if (addGradeBtn)
+            addGradeBtn.addEventListener("click", () =>
+                addRandomGrade(user.id),
+            );
+
+        function renderProfile(userData) {
+            const usernameEl = document.getElementById("profile-username");
+            const careerEl = document.getElementById("profile-career");
+            const matriculaEl = document.getElementById("profile-matricula");
+            const matriculaDetailEl = document.getElementById(
+                "profile-matricula-detail",
+            );
+            const emailEl = document.getElementById("profile-email");
+            const phoneEl = document.getElementById("profile-phone");
+            const imgEl = document.getElementById(
+                "profile-image",
+            ) as HTMLImageElement;
+
+            if (usernameEl) usernameEl.textContent = userData.username;
+            if (careerEl)
+                careerEl.textContent = userData.career || "Carrera no asignada";
+            if (matriculaEl)
+                matriculaEl.textContent = userData.matricula || "Sin matrícula";
+            if (matriculaDetailEl)
+                matriculaDetailEl.textContent =
+                    userData.matricula || "No registrada";
+            if (emailEl) emailEl.textContent = userData.email;
+            if (phoneEl)
+                phoneEl.textContent = userData.phone || "No registrado";
+            if (imgEl && userData.profile_picture)
+                imgEl.src = userData.profile_picture;
+        }
+
+        function openEditModal() {
+            const usernameInput = document.getElementById(
+                "edit-username",
+            ) as HTMLInputElement;
+            const careerInput = document.getElementById(
+                "edit-career",
+            ) as HTMLSelectElement;
+            const matriculaInput = document.getElementById(
+                "edit-matricula",
+            ) as HTMLInputElement;
+            const emailInput = document.getElementById(
+                "edit-email",
+            ) as HTMLInputElement;
+            const phoneInput = document.getElementById(
+                "edit-phone",
+            ) as HTMLInputElement;
+            const picInput = document.getElementById(
+                "edit-profile-picture",
+            ) as HTMLInputElement;
+
+            if (usernameInput) usernameInput.value = user.username;
+            if (careerInput) careerInput.value = user.career || "";
+            if (matriculaInput) matriculaInput.value = user.matricula || "";
+            if (emailInput) emailInput.value = user.email;
+            if (phoneInput) phoneInput.value = user.phone || "";
+            if (picInput) picInput.value = user.profile_picture || "";
+
+            if (modal) modal.classList.remove("hidden");
+        }
+
+        function closeEditModal() {
+            if (modal) modal.classList.add("hidden");
+            const errorEl = document.getElementById("edit-error");
+            if (errorEl) errorEl.classList.add("hidden");
+        }
+
+        async function handleEditSubmit(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const errorEl = document.getElementById("edit-error");
+
+            const updatedData = {
+                userId: user.id, // Aseguramos enviar el ID
+                username: formData.get("username"),
+                career: formData.get("career"),
+                matricula: formData.get("matricula"),
+                email: formData.get("email"),
+                phone: formData.get("phone"),
+                profile_picture: formData.get("profile_picture"),
+            };
+
+            try {
+                const response = await fetch("/api/user/update", {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(updatedData),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Actualizar localStorage y UI
+                    user = { ...user, ...data.user };
+                    localStorage.setItem("user_info", JSON.stringify(user));
+                    renderProfile(user);
+                    closeEditModal();
+                    alert("Perfil actualizado correctamente");
+                } else {
+                    if (errorEl) {
+                        errorEl.textContent =
+                            data.message || "Error al actualizar";
+                        errorEl.classList.remove("hidden");
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+                if (errorEl) {
+                    errorEl.textContent = "Error de conexión";
+                    errorEl.classList.remove("hidden");
+                }
+            }
+        }
+
+        async function handleDeleteAccount() {
+            if (
+                !confirm(
+                    "¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.",
+                )
+            ) {
+                return;
+            }
+
+            try {
+                const response = await fetch("/api/user/delete", {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ userId: user.id }),
+                });
+
+                if (response.ok) {
+                    alert("Cuenta eliminada correctamente");
+                    localStorage.removeItem("user_info");
+                    localStorage.removeItem("admin_auth");
+                    window.location.href = "/";
+                } else {
+                    const data = await response.json();
+                    alert(data.message || "Error al eliminar cuenta");
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Error de conexión al eliminar cuenta");
+            }
+        }
+
+        // --- Funciones de Calificaciones (Existentes) ---
+        function loadGrades(userId) {
+            const gradesBody = document.getElementById("grades-body");
+            if (!gradesBody) return;
+
+            const storedGrades = localStorage.getItem(`demo_grades_${userId}`);
+            let grades = [];
+
+            if (storedGrades) {
+                grades = JSON.parse(storedGrades);
+            } else {
+                grades = [
+                    { subject: "Matemáticas I", semester: "1°", grade: 95 },
+                    {
+                        subject: "Programación Estructurada",
+                        semester: "1°",
+                        grade: 100,
+                    },
+                    { subject: "Inglés I", semester: "1°", grade: 85 },
+                ];
+                localStorage.setItem(
+                    `demo_grades_${userId}`,
+                    JSON.stringify(grades),
+                );
+            }
+            renderGrades(grades);
+        }
+
+        function renderGrades(grades) {
+            const gradesBody = document.getElementById("grades-body");
+            if (!gradesBody) return;
+            gradesBody.innerHTML = "";
+
+            if (grades.length === 0) {
+                gradesBody.innerHTML = `<tr><td colspan="4" class="px-6 py-4 text-center text-sm text-gray-500">No hay calificaciones registradas.</td></tr>`;
+                return;
+            }
+
+            grades.forEach((grade) => {
+                const status = grade.grade >= 70 ? "Aprobado" : "Reprobado";
+                const statusColor =
+                    grade.grade >= 70
+                        ? "text-green-600 bg-green-100"
+                        : "text-red-600 bg-red-100";
+                const row = `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${grade.subject}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${grade.semester}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold">${grade.grade}</td>
+                        <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusColor}">${status}</span></td>
+                    </tr>`;
+                gradesBody.innerHTML += row;
             });
         }
-    });
 
-    function loadGrades(userId) {
-        // Simulación: leer de localStorage 'demo_grades_' + userId
-        // En una app real: fetch(`/api/grades?userId=${userId}`)
-
-        const gradesBody = document.getElementById("grades-body");
-        if (!gradesBody) return;
-
-        const storedGrades = localStorage.getItem(`demo_grades_${userId}`);
-        let grades = [];
-
-        if (storedGrades) {
-            grades = JSON.parse(storedGrades);
-        } else {
-            // Datos semilla iniciales
-            grades = [
-                { subject: "Matemáticas I", semester: "1°", grade: 95 },
-                {
-                    subject: "Programación Estructurada",
-                    semester: "1°",
-                    grade: 100,
-                },
-                { subject: "Inglés I", semester: "1°", grade: 85 },
+        function addRandomGrade(userId) {
+            const subjects = [
+                "Base de Datos",
+                "Redes",
+                "Desarrollo Web",
+                "IoT",
+                "Inteligencia Artificial",
+                "Ética",
             ];
+            const randomSubject =
+                subjects[Math.floor(Math.random() * subjects.length)];
+            const randomGrade = Math.floor(Math.random() * 41) + 60;
+            const newGrade = {
+                subject: randomSubject,
+                semester: Math.floor(Math.random() * 9) + 1 + "°",
+                grade: randomGrade,
+            };
+            const storedGrades = localStorage.getItem(`demo_grades_${userId}`);
+            let grades = storedGrades ? JSON.parse(storedGrades) : [];
+            grades.push(newGrade);
             localStorage.setItem(
                 `demo_grades_${userId}`,
                 JSON.stringify(grades),
             );
+            renderGrades(grades);
         }
-
-        renderGrades(grades);
-    }
-
-    function renderGrades(grades) {
-        const gradesBody = document.getElementById("grades-body");
-        if (!gradesBody) return;
-
-        gradesBody.innerHTML = "";
-
-        if (grades.length === 0) {
-            gradesBody.innerHTML = `
-                <tr>
-                    <td colspan="4" class="px-6 py-4 text-center text-sm text-gray-500">
-                        No hay calificaciones registradas.
-                    </td>
-                </tr>
-            `;
-            return;
-        }
-
-        grades.forEach((grade) => {
-            const status = grade.grade >= 70 ? "Aprobado" : "Reprobado";
-            const statusColor =
-                grade.grade >= 70
-                    ? "text-green-600 bg-green-100"
-                    : "text-red-600 bg-red-100";
-
-            const row = `
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        ${grade.subject}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        ${grade.semester}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold">
-                        ${grade.grade}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusColor}">
-                            ${status}
-                        </span>
-                    </td>
-                </tr>
-            `;
-            gradesBody.innerHTML += row;
-        });
-    }
-
-    function addRandomGrade(userId) {
-        const subjects = [
-            "Base de Datos",
-            "Redes",
-            "Desarrollo Web",
-            "IoT",
-            "Inteligencia Artificial",
-            "Ética",
-        ];
-        const randomSubject =
-            subjects[Math.floor(Math.random() * subjects.length)];
-        const randomGrade = Math.floor(Math.random() * 41) + 60; // 60-100
-
-        const newGrade = {
-            subject: randomSubject,
-            semester: Math.floor(Math.random() * 9) + 1 + "°",
-            grade: randomGrade,
-        };
-
-        const storedGrades = localStorage.getItem(`demo_grades_${userId}`);
-        let grades = storedGrades ? JSON.parse(storedGrades) : [];
-        grades.push(newGrade);
-
-        localStorage.setItem(`demo_grades_${userId}`, JSON.stringify(grades));
-        renderGrades(grades);
-    }
+    });
 </script>

@@ -33,6 +33,40 @@ import LayoutBase from "../../layouts/MainLayout.astro";
                         />
                     </div>
                     <div>
+                        <label for="matricula" class="sr-only">Matrícula</label>
+                        <input
+                            id="matricula"
+                            name="matricula"
+                            type="text"
+                            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                            placeholder="Matrícula (Opcional)"
+                        />
+                    </div>
+                    <div>
+                        <label for="career" class="sr-only">Carrera</label>
+                        <select
+                            id="career"
+                            name="career"
+                            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                        >
+                            <option value="" disabled selected
+                                >Selecciona tu Carrera</option
+                            >
+                            <option value="Ingeniería en Desarrollo de Software"
+                                >Ingeniería en Desarrollo de Software</option
+                            >
+                            <option value="Ingeniería en Mecatrónica"
+                                >Ingeniería en Mecatrónica</option
+                            >
+                            <option value="Ingeniería en Gestión de Proyectos"
+                                >Ingeniería en Gestión de Proyectos</option
+                            >
+                            <option value="Licenciatura en Gastronomía"
+                                >Licenciatura en Gastronomía</option
+                            >
+                        </select>
+                    </div>
+                    <div>
                         <label for="email" class="sr-only"
                             >Correo Electrónico</label
                         >
@@ -56,7 +90,9 @@ import LayoutBase from "../../layouts/MainLayout.astro";
                         />
                     </div>
                     <div>
-                        <label for="profile_picture" class="sr-only">URL Foto de Perfil</label>
+                        <label for="profile_picture" class="sr-only"
+                            >URL Foto de Perfil</label
+                        >
                         <input
                             id="profile_picture"
                             name="profile_picture"
@@ -131,6 +167,8 @@ import LayoutBase from "../../layouts/MainLayout.astro";
             e.preventDefault();
             const formData = new FormData(e.target as HTMLFormElement);
             const username = formData.get("username");
+            const matricula = formData.get("matricula");
+            const career = formData.get("career");
             const email = formData.get("email");
             const phone = formData.get("phone");
             const profile_picture = formData.get("profile_picture");
@@ -157,6 +195,8 @@ import LayoutBase from "../../layouts/MainLayout.astro";
                     },
                     body: JSON.stringify({
                         username,
+                        matricula,
+                        career,
                         email,
                         phone,
                         profile_picture,

@@ -8,7 +8,7 @@ export const POST = async ({ request }) => {
         await connectDB();
 
         const data = await request.json();
-        const { username, email, password, confirmPassword, phone, profile_picture } = data;
+        const { username, email, password, confirmPassword, phone, profile_picture, matricula, career } = data;
 
         // Validaciones básicas
         if (!username || !email || !password || !confirmPassword) {
@@ -30,11 +30,14 @@ export const POST = async ({ request }) => {
         }
 
         // Verificar si el usuario ya existe
-        const userExists = await User.findOne({ $or: [{ email }, { username }] });
+        const userExists = await User.findOne({ $or: [{ email }, { username }, { matricula: matricula || 'non-existent-matricula' }] });
         if (userExists) {
+            let msg = "El usuario o correo electrónico ya está registrado";
+            if (matricula && userExists.matricula === matricula) msg = "La matrícula ya está registrada";
+
             return new Response(
                 JSON.stringify({
-                    message: "El usuario o correo electrónico ya está registrado",
+                    message: msg,
                 }),
                 { status: 400 }
             );
@@ -48,6 +51,8 @@ export const POST = async ({ request }) => {
             email,
             password, // TODO: Hash password
             phone: phone || '',
+            matricula: matricula || '',
+            career: career || '',
             profile_picture: profile_picture || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
         });
 

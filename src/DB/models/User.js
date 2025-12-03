@@ -8,6 +8,18 @@ const userSchema = new mongoose.Schema({
         trim: true,
         minlength: [3, 'El nombre de usuario debe tener al menos 3 caracteres']
     },
+    matricula: {
+        type: String,
+        unique: true,
+        sparse: true, // Allows null/undefined values to not conflict
+        trim: true,
+        default: ''
+    },
+    career: {
+        type: String,
+        trim: true,
+        default: ''
+    },
     email: {
         type: String,
         required: [true, 'El correo electrónico es requerido'],
