@@ -80,7 +80,7 @@ Página de inicio institucional moderna y responsive para la **Universidad Tecno
 - **[@astrojs/react](https://docs.astro.build/en/guides/integrations-guide/react/)** (v4.4.0) - Integración oficial Astro-React
 - **[Framer Motion](https://www.framer.com/motion/)** (v12.23.22) - Librería de animaciones avanzadas
 
-#### UI & Estilos
+#### UI & Estilos 
 - **[Tailwind CSS](https://tailwindcss.com/)** (v4.1.14) - Utilidades CSS generadas dinámicamente
 - **[@astrojs/tailwind](https://docs.astro.build/en/guides/integrations-guide/tailwind/)** (v6.0.2) - Integración Tailwind-Astro
 - **[@tailwindcss/vite](https://tailwindcss.com/)** (v4.1.14) - Plugin Vite para Tailwind
