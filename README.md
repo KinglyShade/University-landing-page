@@ -100,6 +100,15 @@ Página de inicio institucional moderna y responsive para la **Universidad Tecno
 - **[dotenv](https://github.com/motdotla/dotenv)** (v17.2.3) - Gestión de variables de entorno
 - **[npm](https://www.npmjs.com/)** - Gestor de dependencias y paquetes
 
+### contributors:
+
+<a href="https://github.com/Shadnull/University-landing-page/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Shadnull/University-landing-page" alt="contrib.rocks image" />
+</a>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 ---
 
 ##  Arquitectura del Proyecto
